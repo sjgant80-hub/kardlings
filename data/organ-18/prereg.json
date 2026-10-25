@@ -1,0 +1,75 @@
+{
+ "kind": "digi-card.organ-18.prereg",
+ "v": 1,
+ "organ": "the gear: the estate’s 100 builds that stand in for rented tools, each a Hands card made from fall-kit’s socket record (each build’s own kard.json, the commit its site serves and the tests GitHub ran on it); a card opens its app, says in the game’s words the rented tool it retires, and is gear only when its kard checks and its own tests passed on GitHub",
+ "disclosure": "Not blind, and said so. src/gear.mjs was written and gated (witness CLEAN, every mutant killed, none baselined) before this seal, and the Gear screen was played in a browser on the very record measured here: it showed 100 cards and 75 of them gear, so Q1 is informed by that count. The screen’s kind-of-tool menu prints each kind’s gear count; it was not read before this seal. How many of mint-an-app’s 10 October tested apps are gear now (Q3), and how many cards that fit every stud are gear (Q4), were not worked out before this seal. The record is fall-kit’s socket record taken 2026-10-25 13:39 UTC, vendored at fall-kit 4fd5e92: it can be re-read byte for byte, and every run id in it can be opened on GitHub, but the live pages and runs it records were read once, on that day. A DRY run of the tooling on the first 10 builds, into data/organ-18/dry-record.json, checked the tooling before this seal; its numbers are not the record.",
+ "population": "Every build of the socket record (100), with mint-an-app’s records as vendored saying which apps are proven and which the Kit offers as tools. Six tampered copies of each build’s row. PixelWhisperer’s themes, every one.",
+ "rules": [
+  {
+   "id": "P1",
+   "kind": "property",
+   "claim": "All 100 builds of the socket record are Hands cards; every card’s live page is https://sjgant80-hub.github.io/ and its own name, and answered 200 in the record; every card’s line is said in the game’s words (worked out again the same, no bracket left, no word the copy gate refuses); and PixelWhisperer paints every card’s face, without a refusal, in every one of its themes."
+  },
+  {
+   "id": "P2",
+   "kind": "property",
+   "claim": "A card is gear exactly when its kard checks with the socket’s own checker and its tests passed on GitHub: for all 100 cards the kernel’s answer equals the measuring tool’s own reading of the runs (written apart from the kernel and the socket), and the tests’ verdict equals the record’s own; every gear card’s proof is a run of its own commit that succeeded, and no other card carries a proof."
+  },
+  {
+   "id": "P3",
+   "kind": "property",
+   "claim": "Every card holds against six tampered copies of its row: a failed run added, or its runs emptied, leaves it not gear and says why; another build’s kard, its kard with fits flipped, its live page moved off the estate, or a line that is only a brand is refused: 600 of 600."
+  },
+  {
+   "id": "Q1",
+   "kind": "prediction",
+   "claim": "At least 70 of the 100 cards are gear."
+  },
+  {
+   "id": "Q2",
+   "kind": "prediction",
+   "claim": "Every one of the 11 kinds of tool holds at least one gear card."
+  },
+  {
+   "id": "Q3",
+   "kind": "prediction",
+   "claim": "Of the builds among the 100 that mint-an-app’s records of 10 October list as tested apps (mintable, works or proven), at least 90% are gear in the socket record of 25 October."
+  },
+  {
+   "id": "Q4",
+   "kind": "prediction",
+   "claim": "Every card that fits all five studs is gear."
+  }
+ ],
+ "judgedBy": "tools/judge-18.mjs (pinned below)",
+ "files": {
+  "src/dossier.mjs": "6b92bc74ec5450dc1dca5e5f9edff8fbc78373bdd705bddf2c09126ffdf2f533",
+  "src/card.mjs": "96e456059c3b9924b2d8219cee3a712b4ec558cd65375b1f878a4347f5562b2a",
+  "src/registry.mjs": "c3794bdf297350dc6c74ba6e655dfba1ea962c1656dba7ab291d644b16802b95",
+  "src/data.mjs": "e7964fc7d912bc1ae51c8fee0cab94b18df8c8758be3438a51b5ce3edda9ea4c",
+  "src/mind.mjs": "da33ec2cedd5b06a58e7d42c6d541e03141381d51356dc7038366d31f8d1c839",
+  "src/breed.mjs": "d1eaac9e3f49f0c3ab968abf325640590e6c5b095284fef1ca648e347e1244b6",
+  "src/mesh.mjs": "afe6dee22dbf4dab7e7568cfa873613e36ddf72623f773cd547ae460f2c378b0",
+  "src/claims.mjs": "6819187ef731bade44fb3d6db501876918208e84f8c14f1e674b220dcb91ecee",
+  "src/drop.mjs": "ff9f4fd712c388d8ba03e1922106fc824937c67f9c05c7037a370aaad2425256",
+  "src/cost.mjs": "789ec292dba55d7fcc97355833ea621e8582782e61d11d972c12caf013a4b933",
+  "tools/organ.mjs": "bc666e463baa3fff6bead15e14a7d808077af58ca8ecb3d88ba6eb72d057f9e5",
+  "tools/order.mjs": "aa05edc849ae51c9f2af1d39b22def9b3a745618027dbd63807246f75140039a",
+  "data/SOURCES.json": "2fa4706836b64894a2b31d01a1e944abef030eff3d0a8045425bb5272d881f87",
+  "vendor/SOURCES.json": "3d5adf443d4004d47f88df5b392492293c83b27f6f763f97a65d511e46d0974c",
+  "drop/manifest.json": "d9b3d94fa83f8cd5fc6b33a3f9d97b4876da6298e1815c63c286d02f1ee4a32b",
+  "drop/log.json": "219aff2880e7d2e4a7610db4da1accf5d7a0fff7270b683938c9fcae6acdc475",
+  "src/gear.mjs": "60f6c4a6bff3fb4621dbaeb35bff100ea4e93a22e5f9f228689e262041c3a30d",
+  "src/copy.mjs": "ffcad971d8f90b10bd4752a1c901a9704a23af0a4fac07672c332dacfcf66dcb",
+  "src/item.mjs": "271623f5805c44950feeaa02602a3e26c6527bb7ea645317b872710023dea13d",
+  "vendor/fall-kit/socket.mjs": "e982344941691d7fceddb867167350c4c195520548591ca9e167f6a000276c16",
+  "vendor/fall-kit/socket-kards.json": "b265cdf13d4eb16e98e896afbd1b4e9443de4b52ff2b0c055ac7e4f115041469",
+  "vendor/pixelwhisperer/kards/kardart.mjs": "d724f417d4bfecde2836e4f9efb2a68847af2f1510254bd046176df2a3c3a925",
+  "vendor/mint-an-app/catalogue-data.json": "960a5abc576c834e3f4c5bfb2e30871c6ae70505f59f6fc52dabf6f24604933c",
+  "vendor/mint-an-app/mint-data.json": "ee2fb7b0d40d4668b861a4f0d082d5ecc50944bcef41b132b7abcc97f499baa4",
+  "tools/lib.mjs": "21b54a5461cf8b431cbdb3807e0e251494c220b2fc9930327019a2a3204b4a47",
+  "tools/measure-18.mjs": "b6171721d4f757188f5e6121d47e0c12c5914be3042269b01a9cbb53ef5b6caf",
+  "tools/judge-18.mjs": "db712a1678b1f8c46fd226e5cf4b68b7a9cab6d1c239a680ce678cd14ec021ce",
+  "tools/seal-18.mjs": "286ed651de332de3ca080225d3c307a508dfb5553957c579f38057aebfcb4ca7"
+ }
+}
