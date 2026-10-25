@@ -292,7 +292,7 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
 </section>
 
 <section id="kit-s" class="g-only g-screen" data-screen="kit" aria-labelledby="kit-h">
-  <nav class="g-subnav" aria-label="Collection"><a href="#cards">Collection</a><a href="#kit" aria-current="page">Kit</a><a href="#fusion">Fusion lab</a><a href="#talker">Talker</a></nav>
+  <nav class="g-subnav" aria-label="Collection"><a href="#cards">Collection</a><a href="#kit" aria-current="page">Kit</a><a href="#fusion">Fusion lab</a><a href="#talker">Talker</a><a href="#gear">Gear</a></nav>
   <div class="g-grid g-3">
     <div class="g-col">
       <h2 id="kit-h" class="g-h" data-info="kit">Kit</h2>
@@ -322,7 +322,7 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
 </section>
 
 <section id="fusion-s" class="g-only g-screen" data-screen="fusion" aria-labelledby="fusion-h">
-  <nav class="g-subnav" aria-label="Collection"><a href="#cards">Collection</a><a href="#kit">Kit</a><a href="#fusion" aria-current="page">Fusion lab</a><a href="#talker">Talker</a></nav>
+  <nav class="g-subnav" aria-label="Collection"><a href="#cards">Collection</a><a href="#kit">Kit</a><a href="#fusion" aria-current="page">Fusion lab</a><a href="#talker">Talker</a><a href="#gear">Gear</a></nav>
   <div class="g-grid g-3">
     <div class="g-col">
       <h2 id="fusion-h" class="g-h" data-info="fusion">Fusion lab</h2>
@@ -413,7 +413,7 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
 </section>
 
 <section id="talker-s" class="g-only g-screen" data-screen="talker" aria-labelledby="talker-h">
-  <nav class="g-subnav" aria-label="Collection"><a href="#cards">Collection</a><a href="#kit">Kit</a><a href="#fusion">Fusion lab</a><a href="#talker" aria-current="page">Talker</a></nav>
+  <nav class="g-subnav" aria-label="Collection"><a href="#cards">Collection</a><a href="#kit">Kit</a><a href="#fusion">Fusion lab</a><a href="#talker" aria-current="page">Talker</a><a href="#gear">Gear</a></nav>
   <div class="g-grid g-2">
     <div class="g-col">
       <h2 id="talker-h" class="g-h" data-info="talker">Talker</h2>
@@ -439,6 +439,16 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
   </div>
 </section>
 
+<section id="gear-s" class="g-only g-screen" data-screen="gear" aria-labelledby="gear-h">
+  <nav class="g-subnav" aria-label="Collection"><a href="#cards">Collection</a><a href="#kit">Kit</a><a href="#fusion">Fusion lab</a><a href="#talker">Talker</a><a href="#gear" aria-current="page">Gear</a></nav>
+  <h2 id="gear-h" class="g-h" data-info="gear">Gear</h2>
+  <p class="g-lead">The estate’s builds that stand in for rented tools, one card each. Every card opens its app. A card is gear once its own tests have passed on GitHub; the rest are cards to collect, and each says why.</p>
+  <div class="g-tiles" id="g-gr-tally" aria-live="polite"></div>
+  <div class="g-tabs" role="tablist" aria-label="Which cards"><button role="tab" type="button" id="g-gr-t-all" aria-selected="true">All</button><button role="tab" type="button" id="g-gr-t-gear" aria-selected="false">Gear</button><button role="tab" type="button" id="g-gr-t-collect" aria-selected="false">To collect</button></div>
+  <div class="g-row"><label class="g-small">Kind of tool <select id="g-gr-cat" aria-label="Show one kind of tool"><option value="">Every kind</option></select></label><label class="g-search">Find <input id="g-gr-q" type="search" placeholder="an app, or the tool it retires" aria-label="Search the gear" /></label></div>
+  <p class="g-small g-dim" id="g-gr-at"></p><p class="g-small g-dim" id="g-gr-count" aria-live="polite"></p>
+  <ul class="g-gr-list" id="g-gr-list" aria-label="The gear cards"></ul>
+</section>
 <section id="arena-s" class="g-only g-screen" data-screen="arena" aria-labelledby="arena-h">
   <nav class="g-subnav" aria-label="Play"><a href="#arena" aria-current="page">Arena</a><a href="#raids">Raids</a><a href="#builds">Builds</a><a href="#evals">Eval runs</a></nav>
   <div class="g-grid g-3">
@@ -594,7 +604,7 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
   <h2 id="start-h"><span class="n">01</span>Start here</h2>
   <p><b>The page opens as a game.</b> Its nine screens sit in the dock at the bottom (keys 1 to 9):
   <b>Hero</b> (one of your cards, crowned: talk to it, teach it about you, train it, power it with your own AI key), <b>Estate</b> (every card you hold is a block on your plot), <b>Base</b> (your featured card and what ran while you were away),
-  <b>Collection</b> (your cards, one card inspected, its <b>Kit</b> and the <b>Fusion lab</b>), <b>Play</b> (the <b>Arena</b>, the <b>Raids</b>, and <b>Eval runs</b> — a real test case a day, and missions), <b>Mint</b>
+  <b>Collection</b> (your cards, one card inspected, its <b>Kit</b>, the <b>Fusion lab</b> and the <b>Gear</b>: the estate’s apps that stand in for rented tools), <b>Play</b> (the <b>Arena</b>, the <b>Raids</b>, and <b>Eval runs</b> — a real test case a day, and missions), <b>Mint</b>
   (a card from your own table), <b>Mesh</b>, <b>Send</b> (and the <b>Inbox</b>, for a card someone sent you) and <b>Proof</b> (the drop, a card's
   life, the organs). Every screen runs the same code as this document, which is the game's classic view (Menu → Classic view).</p>
   <ol class="steps">
@@ -608,6 +618,7 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
     <li><b>Hand it on.</b> Paste a friend’s key into “Send” and you get a new PNG that is theirs. They open it in their <a href="#open">Inbox</a>, and everything is checked again on their device.</li>
     <li><b>Kit it for me</b>, or by hand. In Collection → Kit, “Kit it for me” tries your other cards of the business one slot at a time and keeps each that measurably lifts your Kardling, showing what each step added.</li>
     <li><b>Kit it out.</b> In Collection → Kit, put another card of yours from the same business in a node slot (or press “Mint a node”: one search from your key, sealed only if it clears 0.6), mint an app tool from the estate’s proven apps, press Measure to see the kitted score and what each slot adds, then Equip.</li>
+    <li><b>Look through the gear.</b> In Collection → Gear, every card is one of the estate’s apps that stands in for a rented tool. Tap Open to use the app; a card is gear once its own tests have passed on GitHub (tap See the run for the proof), and the others say why they are still cards to collect.</li>
     <li><b>Watch it back.</b> After a duel, “Watch it back” fights it again from its receipt — the very same numbers, or it says so — then plays it case by case; tap any case to read it back by the rules that fired, and it is ringed on the duel’s picture with what really happened. Put up to eight of your cards of one business in a tournament: each match is one duel, the champion takes a title.</li>
     <li><b>Fight, then raid.</b> In Play → Arena, fight a drop card or a friend’s (a friend code carries your kit); re-fight it to see the very same receipt. In Play → Raids, strike a department nobody has solved, or gather a party — your own cards and friends’ — against a whole business.</li>
     <li><b>Build for a job.</b> In Play → Builds, pick one card for each department of a business — yours or the drop’s — and press Measure: your device says whether the build beats its best card (a combo), does worse (an anti-combo), or neither, and what each card adds. Sign your re-run, copy the build code to a friend to sign theirs — two keys prove it, and it goes in the Build book — then shrink it into one small card, kept only if it beats every card it came from.</li>
@@ -617,7 +628,7 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
 </section>
 
 <section id="wallet" data-screen="cards" aria-labelledby="wallet-h">
-  <nav class="g-subnav g-only" aria-label="Collection"><a href="#cards" aria-current="page">Collection</a><a href="#kit">Kit</a><a href="#fusion">Fusion lab</a><a href="#talker">Talker</a></nav>
+  <nav class="g-subnav g-only" aria-label="Collection"><a href="#cards" aria-current="page">Collection</a><a href="#kit">Kit</a><a href="#fusion">Fusion lab</a><a href="#talker">Talker</a><a href="#gear">Gear</a></nav>
   <h2 id="wallet-h"><span class="n">02</span>Your key and collection</h2>
   <p class="sub">The cards whose last signed give names your key, as this device’s registry records them.</p>
   <div class="panel">
@@ -843,6 +854,11 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
     <div class="panel"><h3>Rules, then memory, then your key</h3><p>A question goes to the card’s rules first (the talker: exact, free, offline, with a receipt). A question about you goes to what it remembers: facts found in your own words by fall-os’s memory, kept on this device. Only a question neither can answer goes to your key, and only if the pass allows it and the limit holds. The router is one small gated kernel (src/hero.mjs).</p></div>
     <div class="panel"><h3>One opening, recycled</h3><p>On your key the hero sends one fixed opening every question, the same bytes each time (who it is, its rules in words, what it may share of your memory, the game, how it talks), then the page so far, then your question. A page only grows, never edited, so a provider can reuse the reading it already did: Anthropic is told to cache the opening, and OpenAI, Google and OpenRouter cache repeated openings themselves. Each answer shows what was reused. kar-foldcycle measured the effect on a local model: a repeated opening read 95% faster.</p></div>
   </div>
+  <h3>8 · The gear: the estate’s builds that stand in for rented tools</h3>
+  <div class="grid two">
+    <div class="panel"><h3>A card made from the build itself</h3><p>Each of the estate’s 100 chosen builds carries a <code>kard.json</code>: what it is, the rented tool it stands in for, and its five studs (its AI helper, the kard itself, its mesh, the memory it keeps on your device, its tests), each measured from its own files. fall-kit reads every one, with the commit each build’s site serves and every test GitHub ran on it, into one dated record. The game keeps that record byte for byte and makes a card from each row (Collection → Gear).</p></div>
+    <div class="panel"><h3>Gear only when its own tests passed</h3><p>A card is gear when its kard checks (with the socket’s own checker) and its tests passed on GitHub: one run succeeded and none failed or is still going. The game works that out again from the runs themselves, never from a verdict written down. Every gear card links to the run that passed; every other card is a card to collect and says why, in plain words. Each card opens its app in a new tab. The game keeps only which ones you have opened, on this device.</p></div>
+  </div>
 </section>
 
 <section id="blueprint" data-screen="about" aria-labelledby="blueprint-h">
@@ -854,6 +870,9 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
       <tr><td class="num">vendor/fall-os/</td><td>From fall-os, byte for byte at a pinned commit: kard.mjs (the signed pass and its uncrossable limit) and seed.mjs (a chat history read into facts, recalled offline), with the hash they share.</td></tr>
       <tr><td class="num">vendor/kar-foldcycle/</td><td>From kar-foldcycle, byte for byte: the verdict kernel that judges recycling (win, learn, or suspect when a control speeds up too), used by organ 17.</td></tr>
       <tr><td class="num">ui/hero.js</td><td>The Hero screen: crown, talk, remember, power, train. The only part of the game that may reach another site, and only the AI provider its owner picked.</td></tr>
+      <tr><td class="num">src/gear.mjs</td><td>The gear: a Hands card from each row of fall-kit’s socket record (the build’s kard checked again, its live page, its commit, its runs); gear exactly when the kard checks and the runs passed, worked out again here; the rented tool it retires said in the game’s words, brands left out; the card’s face for the painter. Mutation-gated.</td></tr>
+      <tr><td class="num">ui/gear.js</td><td>The Gear screen: every card painted, its studs, gear or a card to collect and why, its app one tap away, the run that proved it. It fetches only this site’s own files.</td></tr>
+      <tr><td class="num">vendor/fall-kit/</td><td>From fall-kit, byte for byte at a pinned commit: socket.mjs (the five studs, the kard checker and the tests verdict) and socket-kards.json (the dated record of the 100 builds the cards are made from).</td></tr>
       <tr><td class="num">src/dossier.mjs</td><td>The card’s record: issue, give, receipt, skin — each signed, each chained, one canonical byte form; the owner is the last give; facts read off a checked life.</td></tr>
       <tr><td class="num">src/card.mjs</td><td>The PNG: the band carries the dossier’s exact bytes; the face is drawn by the art engine handed in; reading checks CRCs, then seals, then redraws and compares every pixel.</td></tr>
       <tr><td class="num">src/registry.mjs</td><td>The ordered log that settles a double sale: first recorded give wins; one card per serial per maker; a level recorded only once re-run; any copy replays from nothing.</td></tr>
@@ -906,6 +925,11 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
   <div class="grid two">
     <div class="panel"><h4>The cheapest exact answer first</h4><p>Each person crowns a card as their hero. A question its rules answer is answered on the laptop, exactly, with a receipt, and costs nothing. A question about the person is answered from what they told it, kept on that laptop. Only what neither can answer goes to the team’s own AI key, from the person’s browser to the one provider the team chose, inside a limit the person signs into the hero’s pass. Measured over 120 heroes (organ 17): every one of 360 questions the rules could answer went to the rules, and every one of 600 questions off the business went to the key.</p></div>
     <div class="panel"><h4>One opening, read once</h4><p>On a key the hero sends the same opening every question, so the provider can reuse the reading it already did; a provider that caches bills a reused reading for less than a fresh one (Anthropic: about a tenth), and every answer shows how much was reused. Measured on an ordinary 16 GB laptop with no graphics card (organ 17): a repeated opening was read 97% faster than the first time, on a 7B and on a 1B local model alike, and openings never read before saved nothing. Nothing signed can raise a hero’s limit: 1,800 of 1,800 tampered passes were refused.</p></div>
+  </div>
+  <h3>The gear, at work</h3>
+  <div class="grid two">
+    <div class="panel"><h4>An owned tool for each rented one</h4><p>The Gear screen is a catalogue of the estate’s apps that each stand in for one kind of rented software: accounts, legal paperwork, HR, notes, forms, files and more. Every card opens the app itself. Each one runs in your own browser, keeps its data on your own devices, and its code is open, so it carries on whatever happens to us.</p></div>
+    <div class="panel"><h4>Tested, or it is not gear</h4><p>Only an app whose own tests passed on GitHub, on the very commit its site serves, counts as gear, and its card links to that run so your own people can check it. An app without tests of its own is shown as a card to collect, plainly, never dressed up. What each app carries is read from its own files, not from what anyone says about it.</p></div>
   </div>
   <h3>The arena, the raids and builds, at work</h3>
   <div class="grid two">
@@ -1032,6 +1056,8 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
     <details><summary>What does a tool do in a duel?</summary><p>Nothing to the score, and the page says so: the arena and the raids score minds. A tool is an app your Kardling carries for you — it opens from the Kit screen, and its item proves the commit its own tests passed at. Organ 10 checks that a kit carrying a tool scores exactly as the same nodes without one.</p></details>
     <details><summary>What do I get for a raid?</summary><p>For a department nobody has solved: the first strike to clear 0.6 lets its striker seal that department’s first card, with them as its maker. For a world boss: the party’s record, which names every member card, its owner and its measured share in millionths. Nothing is paid; the record is what anyone can re-run.</p></details>
     <details><summary>What is a mesh credit?</summary><p>An accounting of measured contribution, not money: a count of the work a card did in a mesh. the game has no way to spend or exchange one.</p></details>
+    <details><summary>What makes a card gear?</summary><p>Its app’s own tests passed on GitHub, on the commit its site serves: one run succeeded and none failed or is still going. The game works that out from the runs themselves, read from fall-kit’s dated record of the 100 builds, and every gear card links to the run. A card whose app has no tests of its own, or whose last run did not pass, is a card to collect and says which.</p></details>
+    <details><summary>Does opening a card’s app send anything?</summary><p>No. Open takes you to the app’s own page in a new tab, as any link does. The game keeps only which cards you have opened, on this device, and fetches nothing but its own files to show the gear.</p></details>
     <details><summary>Do I need an AI key to play?</summary><p>No. Every card, the talker and your hero’s rules and memory work offline with no key. A key only lets your hero answer what its rules and memory cannot: it is your own key from Anthropic, OpenAI, Google or OpenRouter (a chat app subscription is not a key; a key is paid per use, and some come with a free allowance).</p></details>
     <details><summary>Does my hero send my chat history to an AI company?</summary><p>No. Your history is read in this tab; only the facts found in it are kept, on this device, and the file is never sent anywhere. Those facts go to your key’s provider only if you tick “Let it bring what it remembers of me”, and then only the twelve heaviest, inside your hero’s opening.</p></details>
     <details><summary>How much of my key can my hero use?</summary><p>No more than the limit you sign into its pass. Before each question it reckons what the question could use (its opening, the page so far, the question and the longest answer it asks for) and refuses if that would pass the limit. Every answer shows what it used and what is left.</p></details>
@@ -1055,12 +1081,13 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:v
 </footer>
 </div>
 <nav id="g-dock" class="g-only g-dock" aria-label="Screens" data-icons="1">
-  <a href="#hero" data-go="hero"><span class="n">1</span>Hero</a><a href="#estate" data-go="estate"><span class="n">2</span>Estate</a><a href="#base" data-go="base"><span class="n">3</span>Base</a><a href="#cards" data-go="cards" data-group="cards kit fusion talker"><span class="n">4</span>Collection</a><a href="#arena" data-go="arena" data-group="arena raids builds evals"><span class="n">5</span>Play</a>
+  <a href="#hero" data-go="hero"><span class="n">1</span>Hero</a><a href="#estate" data-go="estate"><span class="n">2</span>Estate</a><a href="#base" data-go="base"><span class="n">3</span>Base</a><a href="#cards" data-go="cards" data-group="cards kit fusion talker gear"><span class="n">4</span>Collection</a><a href="#arena" data-go="arena" data-group="arena raids builds evals"><span class="n">5</span>Play</a>
   <a href="#mint" data-go="mint"><span class="n">6</span>Mint</a><a href="#mesh" data-go="mesh"><span class="n">7</span>Mesh</a><a href="#send" data-go="send"><span class="n">8</span>Send</a><a href="#proof" data-go="proof"><span class="n">9</span>Proof</a>
 </nav>
 <script type="module" src="app.js"></script>
 <script type="module" src="ui/game.js"></script>
 <script type="module" src="ui/first.js"></script>
 <script type="module" src="ui/hero.js"></script>
+<script type="module" src="ui/gear.js"></script>
 </body>
 </html>

@@ -374,6 +374,34 @@ try {
       await scan('the hero');
     }
   }
+  // the gear: the estate's builds as Hands cards, made from fall-kit's socket record (vendored); each opens its own live
+  // app in a new tab; gear only when its own tests passed on GitHub, with the run linked; every other card says why
+  await js(`location.hash = '#gear'`);
+  if (await until(`document.querySelectorAll('#g-gr-list > li').length === 100`, 30000, 'the gear cards')) {
+    const g = await js(`(() => {
+      const li = [...document.querySelectorAll('#g-gr-list > li')], gear = li.filter((x) => x.classList.contains('gear'));
+      const opens = li.filter((x) => { const a = x.querySelector('[data-gr-open]'); return a && a.target === '_blank' && a.rel === 'noopener' && a.href === 'https://sjgant80-hub.github.io/' + x.dataset.gr + '/'; }).length;
+      const runs = gear.filter((x) => /^https:\\/\\/github\\.com\\/sjgant80-hub\\/[a-z0-9._-]+\\/actions\\/runs\\/[0-9]+$/.test((x.querySelector('a[href*="/actions/runs/"]') || {}).href || '')).length;
+      const whys = li.filter((x) => !x.classList.contains('gear') && /Not gear yet: [a-z]/.test(x.textContent)).length;
+      const blank = [...document.querySelectorAll('#g-gr-list canvas')].filter((c) => { const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 400) if (d[i]) return false; return true; }).length;
+      const brands = li.filter((x) => /-style/.test(x.querySelector('.g-gr-retires').textContent)).length;
+      return { n: li.length, gear: gear.length, opens, runs, whys, blank, brands };
+    })()`);
+    (g.n === 100 && g.opens === 100 && g.blank === 0 && g.gear > 0 && g.runs === g.gear && g.whys === 100 - g.gear && g.brands === 0)
+      ? seen.push('the gear: 100 cards painted, each opening its own live app; ' + g.gear + ' gear, each linking the run that passed; the rest saying why; no brand on a card')
+      : problems.push('the gear: ' + JSON.stringify(g));
+    await js(`document.querySelector('#g-gr-t-gear').click()`); await sleep(200);
+    const only = await js(`[...document.querySelectorAll('#g-gr-list > li')].map((x) => x.classList.contains('gear'))`);
+    await js(`document.querySelector('#g-gr-t-collect').click()`); await sleep(200);
+    const rest = await js(`[...document.querySelectorAll('#g-gr-list > li')].map((x) => x.classList.contains('gear'))`);
+    await js(`document.querySelector('#g-gr-t-all').click()`); await sleep(200);
+    (only.length === g.gear && only.every(Boolean) && rest.length === 100 - g.gear && rest.every((x) => !x)) ? seen.push('the gear tabs: Gear shows only gear, To collect only the rest') : problems.push('the gear tabs showed ' + only.length + ' and ' + rest.length);
+    // opening a card's app: the new tab is held back here (the page is the app's own, not the game's), and the game keeps that it was opened
+    await js(`document.addEventListener('click', (e) => { if (e.target.closest('[data-gr-open]')) e.preventDefault(); }, { capture: true, once: true }); document.querySelector('#g-gr-list > li [data-gr-open]').click()`); await sleep(200);
+    const kept = await js(`({ tally: document.querySelector('#g-gr-tally').textContent, mark: !document.querySelector('#g-gr-list > li .g-tag.cy').hidden })`);
+    (/You have opened\s*1 of 100/i.test(kept.tally) && kept.mark) ? seen.push('opening a card’s app is kept on this device: 1 of 100 opened') : problems.push('opening a card’s app was not kept: ' + JSON.stringify(kept));
+    await scan('the gear');
+  }
   // a world boss: the player's own telco cards strike it as a party, and strike again to the very same receipt
   await js(`location.hash = '#raids'`);
   if (await until(`[...document.querySelectorAll('#g-pt-bosses .g-boss h3')].some((h) => /Telecom/.test(h.textContent))`, 30000, 'the world bosses')) {
@@ -484,7 +512,7 @@ try {
   // phone width: every screen holds without a sideways scroll
   await size(390, 844, true); await sleep(400);
   const wide = [], untitled = [];
-  for (const s of ['hero', 'estate', 'base', 'cards', 'kit', 'fusion', 'talker', 'arena', 'raids', 'builds', 'evals', 'mint', 'mesh', 'send', 'proof', 'boot', 'about']) {
+  for (const s of ['hero', 'estate', 'base', 'cards', 'kit', 'fusion', 'talker', 'gear', 'arena', 'raids', 'builds', 'evals', 'mint', 'mesh', 'send', 'proof', 'boot', 'about']) {
     await js(`location.hash = '#${s}'`); await sleep(500);
     const w = await js(`document.documentElement.scrollWidth`);
     // a screen too wide names what pushes it: the widest-reaching element, so the next fix starts from the culprit

@@ -78,6 +78,7 @@ const INFO = {
   lineage: 'Who a card was fused from, read from the seals of the cards this device holds. A parent this device does not hold is named by its id, never drawn or guessed.',
   sandbox: 'A tool runs in a box: a frame that never shares this page’s origin, so it cannot read or change anything of the game’s — your cards, this page’s storage — and it never moves a score. Before it opens, its own page is read for what it asked for: the network its security policy lets it reach, and whether it keeps anything in storage (inside the box, its own and empty).',
   replay: 'Watched back: the duel fought again from its own receipt (it must give the very same numbers), then laid out case by case — each side’s call, and whether the case really was a yes. Tap a case to read it back: the very rules of each mind that fired on it.',
+  gear: 'Gear: the estate’s builds that stand in for rented tools. Each card is made from the build’s own kard.json and the tests GitHub ran on the commit its site serves, read from fall-kit’s socket record. A card is gear only when its own tests passed; tap Open to use the app, or See the run for the proof.',
   hero: 'Your hero: one of your cards, crowned. It answers from its own rules first, then from what it remembers of you, and only then from your own AI key, inside a limit you sign. Its class is its business. It levels up only by beating its old self on cases it never saw.',
   talker: 'The talker: ask your Kardling in plain words. It reads the values your question gives with its business’s own words, then answers yes or no with the rules that fired, says how it decides, or says how good it is, as this device measured it. Anything else, or a question missing a value its rules read, gets an honest “I can’t answer that” and what it would need. It never makes an answer up: the same question always gets the same answer, with a receipt.',
   learn: 'Learn to ask: ten missions that teach asking a card that can tell you no, from asking about one case to turning its answer round with one value. Each is marked by the talker itself, by asking the card again the questions you asked it: nothing stored is trusted, and no model judges.',
@@ -249,9 +250,9 @@ const whose = (v) => (v.owner === S.me.pub ? 'yours' : v.owner === S.maker.pub ?
 // ── screens ─────────────────────────────────────────────────────────────────────────────────────────────────────────
 const ALIAS = { wallet: 'cards', own: 'mint', open: 'send', drop: 'proof', explorer: 'proof', 'send-s': 'send', 'base-s': 'base', 'estate-s': 'estate', 'evals-s': 'evals', 'boot-s': 'boot', 'first-s': 'first' };
 const CLASSIC = ['top', 'what', 'worth', 'words', 'start', 'how', 'blueprint', 'business', 'cost', 'paper', 'faq'];
-const SCREENS = ['first', 'boot', 'hero', 'estate', 'base', 'cards', 'kit', 'fusion', 'talker', 'arena', 'raids', 'builds', 'evals', 'mint', 'mesh', 'send', 'proof'];
+const SCREENS = ['first', 'boot', 'hero', 'estate', 'base', 'cards', 'kit', 'fusion', 'talker', 'gear', 'arena', 'raids', 'builds', 'evals', 'mint', 'mesh', 'send', 'proof'];
 const DOCK = ['hero', 'estate', 'base', 'cards', 'arena', 'mint', 'mesh', 'send', 'proof'];
-const TITLES = { first: 'Kardlings', boot: 'Boot', hero: 'Hero', estate: 'My estate', base: 'Base', cards: 'Cards', kit: 'Kit', fusion: 'Fusion Lab', talker: 'Talker', arena: 'Arena', raids: 'Raids', builds: 'Builds', evals: 'Eval runs', mint: 'Mint station', mesh: 'Mesh', send: 'Send', proof: 'Proof explorer', about: 'About' };
+const TITLES = { first: 'Kardlings', boot: 'Boot', hero: 'Hero', estate: 'My estate', base: 'Base', cards: 'Cards', kit: 'Kit', fusion: 'Fusion Lab', talker: 'Talker', gear: 'Gear', arena: 'Arena', raids: 'Raids', builds: 'Builds', evals: 'Eval runs', mint: 'Mint station', mesh: 'Mesh', send: 'Send', proof: 'Proof explorer', about: 'About' };
 
 function route() {
   const h = decodeURIComponent((location.hash || '').slice(1));

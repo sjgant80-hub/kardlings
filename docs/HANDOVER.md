@@ -82,7 +82,7 @@ regenerate into the committed record and commit it: a record is measured once, a
 `from` path and sha256. `node tools/revendor.mjs <owner/repo> <full 40-hex commit>` re-vendors one source byte for byte
 from its local checkout; then `node tools/vendor-check.mjs`. **Never re-vendor while an organ's record is still to be
 committed** — SOURCES.json is in every organ's BASE pins, so it would break that organ's order proof.
-Sources: dex-frontier (the kernels' statistics, couplings and seed-library), pixelwhisperer (every picture: card faces
+Sources: fall-kit (the socket and its record of the 100 builds, for the gear), dex-frontier (the kernels' statistics, couplings and seed-library), pixelwhisperer (every picture: card faces
 and backs, the estate map, the duel, raids and chapters, fusion), mint-an-app (the app tools' records), kcc-mesh (the
 contribution ledger's code).
 
@@ -118,6 +118,24 @@ f8faf8e). Traps:
   leaves the machine, and reads every request back (fixed opening, cache marker, fallback header, key not in the body).
 - The memory keeps only facts (fall-os's buckets), never the export it read; the twelve heaviest go to a provider only
   when the pass allows 'remember'.
+
+## The gear (organ 18)
+
+`src/gear.mjs` (a Hands card from each row of fall-kit's socket record; gear exactly when the row's kard checks with the
+socket's own checker and `verdictOf` its runs is green, worked out again here; the retires line in the game's words,
+brackets and commas dropped; the painter's item facts) and `ui/gear.js` (Collection → Gear). Vendored for it:
+`vendor/fall-kit/socket.mjs` and `vendor/fall-kit/socket-kards.json` (fall-kit's dated record of the 100 builds: each
+kard as its site serves it, the branch and commit its site serves, every GitHub run on that commit, its live status).
+PixelWhisperer's `kardart.mjs` paints the card with its `retires` line. Traps:
+- **The record is a snapshot.** To refresh: in fall-kit, `node socket-snapshot.mjs` (needs `gh`), commit, push; then here
+  `node tools/revendor.mjs sjgant80-hub/fall-kit <sha>` and `node tools/vendor-check.mjs`. Organ 18 pins the record it
+  measured, so a refresh after its record is committed changes nothing it claims (order is checked between seal and
+  record); say the new date on the page.
+- **Gear is never taken from the record's own `verdict`**: the kernel re-derives it from the runs. A build whose site is
+  served from another branch or a folder is listed with `branch`/`page` in fall-kit's socket-builds.json.
+- **Brand names stay off the game's pages**: the kernel drops anything in brackets; ui-play fails if "-style" shows on a card.
+- **Opening an app** is a plain link in a new tab; the game keeps only `gearOpened` (which cards were opened) in its
+  state on this device.
 
 ## Builds and combos (organ 16)
 

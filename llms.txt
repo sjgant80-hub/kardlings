@@ -43,6 +43,10 @@ Powered by the Konomi architecture, created by Thomas Frumkin. Supplier: AI Nati
 
 A player's hero is one of their cards, crowned with a pass they sign (fall-os's kard format, vendored): which card, what it may do (talk; share what it remembers; use the player's own AI key) and the most of that key it may ever use. A question goes to the card's rules first (exact, offline), then to what it remembers of its player (facts from their own words, kept on the device), and only then to the player's own key (Anthropic, OpenAI, Google or OpenRouter) inside the limit. On a key it sends one fixed opening every question so the provider can reuse its reading; each answer says what was reused. The page's CSP allows only this site and those four providers. Kernel: src/hero.mjs (mutation-gated). Screen: ui/hero.js.
 
+## The gear
+
+Collection → Gear: a card for each of the estate's 100 builds that stand in for rented tools, made from fall-kit's socket record (vendored: each build's kard.json, the commit its site serves, every GitHub test run on it, its live status). A card opens its app and says the rented tool it retires (brand names left out). It is gear only when its kard checks and its own tests passed on GitHub, re-derived from the runs, with the run linked; the rest are cards to collect and say why. src/gear.mjs (mutation-gated), ui/gear.js, organ 18.
+
 ## The talker
 
 Any Kardling card can be asked in plain words on its Talker screen. It answers yes or no about one case only from the rules that fired, says how it decides and how good it is, and otherwise abstains and says what it would need: it never makes an answer up, and the same question always gets the same answer with a receipt. Organ 14 measured it on 1,500 GATE rows said in words.

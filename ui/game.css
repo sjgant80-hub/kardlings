@@ -370,3 +370,18 @@ html.game .g-door:hover, html.game .g-door:focus-visible { border-color: #ffd23c
 
 /* the hero’s plate: PixelWhisperer’s pixels, kept crisp and never wider than its panel */
 .g-hr-plate { display: block; width: 100%; max-width: 384px; height: auto; image-rendering: pixelated; margin: 0 auto 8px; }
+/* the Gear screen: one card a row-cell, its picture beside what it retires, its studs and whether it is gear */
+.g-gr-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 10px; }
+.g-gr-card { display: flex; gap: 10px; padding: 8px; background: var(--g-plate); border: 2px solid var(--g-rule); }
+.g-gr-card.gear { border-color: var(--g-ok); }
+.g-gr-face { width: 144px; height: 210px; flex: none; image-rendering: pixelated; }
+.g-gr-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.g-gr-body h3 { margin: 0; font-size: 18px; color: var(--g-gold); overflow-wrap: anywhere; }
+.g-gr-retires { margin: 0; overflow-wrap: anywhere; }
+.g-gr-studs { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; }
+.g-gr-body .g-row { flex-wrap: wrap; gap: 6px; margin-top: auto; }
+@media (max-width: 560px) {
+  .g-gr-list { grid-template-columns: minmax(0, 1fr); }
+  .g-gr-face { width: 96px; height: 140px; }
+  .g-gr-body h3 { font-size: 15px; }
+}

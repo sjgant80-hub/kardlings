@@ -70,16 +70,32 @@ function readFacts(x) {
   return { ok: true, f: { id, title, dataset, department, stage, rarity, generation, parents: kin, di, ri } };
 }
 function readItem(x) {
-  const { form, id, name, source, tier, spdx = '', kit = false } = x;
+  const { form, id, name, source, tier, spdx = '', kit = false, retires = '' } = x;
   if (FORMS.indexOf(form) < 1) return no('form must be one of ' + FORMS.join(', '));
   if (!isId(id)) return no('id must be 16 lowercase hex characters');
   if (typeof name !== 'string' || name.length > 24 || !only(name, TITLE_CH)) return no('name must be at most 24 characters from A-Z a-z 0-9 space & . - and the apostrophe');
-  if (typeof source !== 'string' || source.length < 1 || source.length > 20 || !only(source, SRC_CH)) return no('source must be 1 to 20 characters from A-Z a-z 0-9 . and -');
+  if (typeof source !== 'string' || source.length < 1 || source.length > 22 || !only(source, SRC_CH)) return no('source must be 1 to 22 characters from A-Z a-z 0-9 . and -');
   const ri = TIERS.indexOf(tier);
   if (ri < 0) return no('tier must be one of ' + TIERS.join(', '));
   if (typeof spdx !== 'string' || spdx.length > 16 || !only(spdx, SRC_CH)) return no('spdx must be at most 16 characters from A-Z a-z 0-9 . and -');
   if (typeof kit !== 'boolean') return no('kit must be true or false');
-  return { ok: true, f: { form, id, name, source, tier, spdx, kit, ri } };
+  if (typeof retires !== 'string' || retires.length > RETIRES_MAX || !only(retires, TITLE_CH) || retires.trim() !== retires || retires.includes('  ') || retires.split(' ').some((w) => w.length > 27)) return no('retires must be at most ' + RETIRES_MAX + ' characters from A-Z a-z 0-9 space & . - and the apostrophe, single-spaced, no word over 27 characters, no space at either end');
+  return { ok: true, f: { form, id, name, source, tier, spdx, kit, retires, ri } };
+}
+/** The longest "retires" line an item card takes: the rented tool its app stands in for, on two painted lines. */
+export const RETIRES_MAX = 60;
+const LINE_W = 161;   // the widest line the panel takes: 27 characters (a string is 6n - 1 pixels wide)
+/** A retires line wrapped onto the card's two lines at word breaks; what does not fit ends the second line with ~. Exported for tests. */
+export function retiresLines(s) {
+  const words = typeof s === 'string' ? s.split(' ').filter((w) => w) : [], lines = ['', ''];
+  let i = 0;
+  for (const n of [0, 1]) while (i < words.length && tw((lines[n] ? lines[n] + ' ' : '') + words[i]) <= LINE_W) { lines[n] = (lines[n] ? lines[n] + ' ' : '') + words[i]; i++; }
+  if (i < words.length) {   // more than two lines' worth: end on a whole word that leaves room for the ~
+    const last = lines[1] ? lines[1].split(' ') : [];
+    while (last.length && tw(last.join(' ') + ' ~') > LINE_W) last.pop();
+    lines[1] = last.length ? last.join(' ') + ' ~' : '~';
+  }
+  return lines;
 }
 const dim = (n) => Number.isInteger(n) && n >= 64 && n <= 1024;
 
@@ -363,6 +379,14 @@ function itemChrome(cv, f, look) {   // an item's panel: what it is, its verifie
   label(cv, 'FROM', 12, 205, p.mid, u.shadow); label(cv, f.source, 42, 205, u.text, u.shadow);
   const named = f.kit ? KIT_SLOTS[f.form] : GEAR[f.form], slot = named.toUpperCase() + ' SLOT';   // the slot it fits, in the kit's words when it says kit; beside it, its licence
   const fits = f.kit ? (named === 'voice' ? slot : 'FITS A ' + slot) : 'FITS THE ' + slot;
+  if (f.retires) {   // a card for an app that stands in for a rented tool: that tool, in place of the licence and the tier ladder
+    label(cv, 'RETIRES', 12, 216, p.mid, u.shadow); label(cv, slot, 176 - tw(slot), 216, p.mid, u.shadow);
+    rect(cv, 12, 226, 164, 1, u.rule);
+    const [a, b] = retiresLines(f.retires);
+    label(cv, a, 12, 231, u.text, u.shadow); label(cv, b, 12, 241, u.text, u.shadow);
+    idLine(cv, f.id, u, p);
+    return;
+  }
   if (f.spdx) { label(cv, f.spdx, 12, 216, u.text, u.shadow); label(cv, slot, 176 - tw(slot), 216, p.mid, u.shadow); } else label(cv, fits, 12, 216, u.text, u.shadow);
   rect(cv, 12, 226, 164, 1, u.rule);
   let x = 12;   // the tier ladder: each tier the item has reached is lit, with a chevron on to the next

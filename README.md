@@ -12,7 +12,7 @@ Everything on the live page is this repository's mutation-gated code running in 
 datasets. Nothing is mocked; nothing is sent anywhere, except what you ask your hero on your own AI key, which goes only to the provider you picked.
 
 The page opens as a game, built from the same blocks as the cards (PixelWhisperer Kards' palettes, rarity rings and
-pixel lettering). Its dock holds nine screens: Hero (your crowned card), Estate, Base, Cards (with each card's Kit), Play (the Arena, the
+pixel lettering). Its dock holds nine screens: Hero (your crowned card), Estate, Base, Cards (with each card's Kit, and the Gear), Play (the Arena, the
 Raids and Evals), Mint, Mesh, Send and Proof (with your record). Card me hands you
 a telco card, and Boot reads it, checks it, grows its mind and counts up to the score your device computed beside the
 one the drop declared. The classic document view (Menu → Classic view) holds the full explanation, the brochure and
@@ -38,6 +38,16 @@ of the limit. The page's Content-Security-Policy allows this site and those four
 Training is the card's own level-up: a new mind is kept only if it beats the old by 0.002 on cases it never saw.
 
 The rules are `src/hero.mjs` (mutation-gated, every mutant killed, none baselined); the screen is `ui/hero.js`.
+
+## The gear
+
+Collection → Gear holds a card for each of the estate's 100 builds that stand in for rented tools. Each card is made
+from one row of fall-kit's socket record (`vendor/fall-kit/socket-kards.json`, byte for byte): the build's own
+`kard.json` as its site serves it, the commit its site serves, every test GitHub ran on that commit, and what its live
+page answered. A card opens its app; it says, in the game's words, the rented tool the app retires; and it is **gear**
+only when its kard checks and its own tests passed on GitHub (worked out again from the runs, never from a verdict
+written down), linking the run that passed. Every other card is a card to collect and says why. The rules are
+`src/gear.mjs` (mutation-gated); the screen is `ui/gear.js`; PixelWhisperer paints each card with its retires line.
 
 ## FallWorld: kit it out, fight, raid — the agent economy as a game, real underneath
 

@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+// tools/seal-18.mjs — organ 18, THE GEAR: the claims, sealed before tools/measure-18.mjs runs.
+import { seal } from './organ.mjs';
+
+seal(18, {
+  organ: 'the gear: the estate’s 100 builds that stand in for rented tools, each a Hands card made from fall-kit’s socket record (each build’s own kard.json, the commit its site serves and the tests GitHub ran on it); a card opens its app, says in the game’s words the rented tool it retires, and is gear only when its kard checks and its own tests passed on GitHub',
+  disclosure: 'Not blind, and said so. src/gear.mjs was written and gated (witness CLEAN, every mutant killed, none baselined) before this seal, and the Gear screen was played in a browser on the very record measured here: it showed 100 cards and 75 of them gear, so Q1 is informed by that count. The screen’s kind-of-tool menu prints each kind’s gear count; it was not read before this seal. How many of mint-an-app’s 10 October tested apps are gear now (Q3), and how many cards that fit every stud are gear (Q4), were not worked out before this seal. The record is fall-kit’s socket record taken 2026-10-25 13:39 UTC, vendored at fall-kit 4fd5e92: it can be re-read byte for byte, and every run id in it can be opened on GitHub, but the live pages and runs it records were read once, on that day. A DRY run of the tooling on the first 10 builds, into data/organ-18/dry-record.json, checked the tooling before this seal; its numbers are not the record.',
+  population: 'Every build of the socket record (100), with mint-an-app’s records as vendored saying which apps are proven and which the Kit offers as tools. Six tampered copies of each build’s row. PixelWhisperer’s themes, every one.',
+  rules: [
+    { id: 'P1', kind: 'property', claim: 'All 100 builds of the socket record are Hands cards; every card’s live page is https://sjgant80-hub.github.io/ and its own name, and answered 200 in the record; every card’s line is said in the game’s words (worked out again the same, no bracket left, no word the copy gate refuses); and PixelWhisperer paints every card’s face, without a refusal, in every one of its themes.' },
+    { id: 'P2', kind: 'property', claim: 'A card is gear exactly when its kard checks with the socket’s own checker and its tests passed on GitHub: for all 100 cards the kernel’s answer equals the measuring tool’s own reading of the runs (written apart from the kernel and the socket), and the tests’ verdict equals the record’s own; every gear card’s proof is a run of its own commit that succeeded, and no other card carries a proof.' },
+    { id: 'P3', kind: 'property', claim: 'Every card holds against six tampered copies of its row: a failed run added, or its runs emptied, leaves it not gear and says why; another build’s kard, its kard with fits flipped, its live page moved off the estate, or a line that is only a brand is refused: 600 of 600.' },
+    { id: 'Q1', kind: 'prediction', claim: 'At least 70 of the 100 cards are gear.' },
+    { id: 'Q2', kind: 'prediction', claim: 'Every one of the 11 kinds of tool holds at least one gear card.' },
+    { id: 'Q3', kind: 'prediction', claim: 'Of the builds among the 100 that mint-an-app’s records of 10 October list as tested apps (mintable, works or proven), at least 90% are gear in the socket record of 25 October.' },
+    { id: 'Q4', kind: 'prediction', claim: 'Every card that fits all five studs is gear.' },
+  ],
+}, ['src/gear.mjs', 'src/copy.mjs', 'src/item.mjs', 'vendor/fall-kit/socket.mjs', 'vendor/fall-kit/socket-kards.json', 'vendor/pixelwhisperer/kards/kardart.mjs', 'vendor/mint-an-app/catalogue-data.json', 'vendor/mint-an-app/mint-data.json', 'tools/lib.mjs']);
