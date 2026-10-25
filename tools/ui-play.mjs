@@ -524,5 +524,10 @@ try {
   else seen.push('every screen fits 390 px');
   if (untitled.length) problems.push('a screen with no title in the tab: ' + untitled.join(', '));
   else seen.push('every screen names itself in the tab');
+  // a page opened straight at a screen another script draws: it draws (the Gear screen stayed empty live on 2026-10-25)
+  await size(1280, 800);
+  await send('Page.navigate', { url: url.split('#')[0] + '#gear' });
+  (await until(`document.querySelectorAll('#g-gr-list > li').length === 100`, 30000, 'the Gear screen opened straight from its link'))
+    ? seen.push('opened straight at #gear, the gear draws') : problems.push('opened straight at #gear, the gear did not draw');
   await done(problems.length ? 1 : 0);
 } catch (e) { problems.push(String((e && e.message) || e)); await done(1); }

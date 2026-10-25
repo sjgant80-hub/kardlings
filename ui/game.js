@@ -274,9 +274,10 @@ function go(screen, opts = {}) {
   if (opts.focus !== false && h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
   render(screen);
 }
-/** screens another script draws (ui/hero.js registers the hero's) */
+/** screens another script draws (ui/hero.js registers the hero's, ui/gear.js the gear's). A page opened straight at one
+ *  of them has already routed before its script registers, so registering draws it at once when it is the screen showing. */
 const EXTRA = {};
-export function screen(name, draw) { EXTRA[name] = draw; }
+export function screen(name, draw) { EXTRA[name] = draw; if (G.screen === name && document.documentElement.classList.contains('game')) draw(); }
 function render(screen) {
   ({ first: renderFirst, estate: renderEstate, base: renderBase, cards: renderCards, kit: renderKit, fusion: renderFusion, talker: renderTalker, arena: () => { renderArena(); renderTournament(); }, raids: () => { renderCampaign(); renderRaids(); renderWorld(); }, builds: renderBuilds, evals: renderEvals, mint: () => {}, mesh: renderMesh, send: renderSend, proof: renderProof }[screen] || EXTRA[screen] || (() => {}))();
   renderTop(); renderRail();
