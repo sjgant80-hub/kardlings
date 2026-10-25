@@ -1,0 +1,57 @@
+{
+ "kind": "digi-card.organ-18.verdict",
+ "v": 1,
+ "prereg": "bac295f615452d2b",
+ "record": "b73c858382f34780",
+ "verdicts": [
+  {
+   "id": "P1",
+   "kind": "property",
+   "claim": "All 100 builds of the socket record are Hands cards; every card’s live page is https://sjgant80-hub.github.io/ and its own name, and answered 200 in the record; every card’s line is said in the game’s words (worked out again the same, no bracket left, no word the copy gate refuses); and PixelWhisperer paints every card’s face, without a refusal, in every one of its themes.",
+   "pass": true,
+   "saw": "100 of 100 builds made cards; 100 live pages at their own address answered 200; 100 lines in the game’s words; 100 faces painted in all 5 themes"
+  },
+  {
+   "id": "P2",
+   "kind": "property",
+   "claim": "A card is gear exactly when its kard checks with the socket’s own checker and its tests passed on GitHub: for all 100 cards the kernel’s answer equals the measuring tool’s own reading of the runs (written apart from the kernel and the socket), and the tests’ verdict equals the record’s own; every gear card’s proof is a run of its own commit that succeeded, and no other card carries a proof.",
+   "pass": true,
+   "saw": "100 of 100 cards gear exactly as this tool reads the runs; 100 verdicts as the record’s own; 100 proofs right (a run of its own that succeeded on every gear card, none on the rest)"
+  },
+  {
+   "id": "P3",
+   "kind": "property",
+   "claim": "Every card holds against six tampered copies of its row: a failed run added, or its runs emptied, leaves it not gear and says why; another build’s kard, its kard with fits flipped, its live page moved off the estate, or a line that is only a brand is refused: 600 of 600.",
+   "pass": true,
+   "saw": "600 of 600 tampered rows held: a failed run added 100, runs emptied 100, another build’s kard 100, fits flipped 100, page moved 100, a line only a brand 100"
+  },
+  {
+   "id": "Q1",
+   "kind": "prediction",
+   "claim": "At least 70 of the 100 cards are gear.",
+   "pass": true,
+   "saw": "75 of 100 cards are gear"
+  },
+  {
+   "id": "Q2",
+   "kind": "prediction",
+   "claim": "Every one of the 11 kinds of tool holds at least one gear card.",
+   "pass": true,
+   "saw": "11 kinds of tool; AI you own 7/10; CRM and sales 2/7; Accounting and tax 11/13; Legal 11/14; Health and care 9/9; Insurance, mortgages and advice 7/10; HR and recruitment 8/8; Property and trades 4/5; Office, notes and design 7/9; Files, identity and security 5/8; Bookings, forms and marketing 4/7"
+  },
+  {
+   "id": "Q3",
+   "kind": "prediction",
+   "claim": "Of the builds among the 100 that mint-an-app’s records of 10 October list as tested apps (mintable, works or proven), at least 90% are gear in the socket record of 25 October.",
+   "pass": true,
+   "saw": "47 of the 48 builds mint-an-app’s records of 10 October list as tested apps are gear on 25 October (98%)"
+  },
+  {
+   "id": "Q4",
+   "kind": "prediction",
+   "claim": "Every card that fits all five studs is gear.",
+   "pass": true,
+   "saw": "63 of the 63 cards that fit every stud are gear"
+  }
+ ]
+}
