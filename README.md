@@ -153,7 +153,7 @@ or sent by the tools: a person does that.
 | `src/earn.mjs` | the record: a player's releases and measured party shares as entries of the credits ledger |
 | `vendor/mint-an-app/` | mint-an-app's records of the estate's apps (which are mintable, their tier, commit and CI run), byte for byte |
 | `vendor/kcc-mesh/` | the credits ledger and its DIGI gate, byte for byte |
-| `data/organ-*/` | seventeen organs: sealed claims, records, verdicts (and organ 12’s superseded record) |
+| `data/organ-*/` | eighteen organs: sealed claims, records, verdicts (and organ 12’s superseded record) |
 | `drop/` | the manifest, the genesis log, every search |
 | `decoder/v1/` | the exact files that read a card, frozen at the drop |
 

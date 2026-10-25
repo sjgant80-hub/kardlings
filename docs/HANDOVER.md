@@ -15,7 +15,7 @@ own AI key: then, and only then, their browser talks to the one provider they pi
 | the page | `node tools/page-check.mjs` | every element live, every link lands, no price, credits present, this-site-only CSP |
 | words | `node tools/copy-gate.mjs` | no word the game never says (no money words, no "alive", no COMING) on any surface |
 | the game played | `node tools/ui-play.mjs` | a headless browser plays every screen end to end, at 1280 px and at 390 px, every title named |
-| organs | `for k in 1..16: node tools/order.mjs --organ $k && (node tools/judge-$k.mjs --check \|\| node tools/superseded.mjs --organ $k)` | each organ sealed before measured, judged by its sealed rules only |
+| organs | `for k in 1..18: node tools/order.mjs --organ $k && (node tools/judge-$k.mjs --check \|\| node tools/superseded.mjs --organ $k)` | each organ sealed before measured, judged by its sealed rules only |
 | mutation | `node witness-all.mjs` (or `node witness-all.mjs src/x.mjs`) | every kernel's tests kill every mutant (PAIRS in witness-all.mjs) |
 
 CI (`.github/workflows/gate.yml`) runs exactly these: job `proof` (tests, vendor, drop, page, ui-play, the organ loop)
@@ -61,6 +61,7 @@ Seal and record are pushed together (CI must never see a prereg without its verd
 | 15 | the guild | a65f318 | f27eeea | 5/5 | none | not fully blind (its disclosure says how) · record carries timings |
 | 16 | builds and combos, and the first training build (the shrink) | 6d3788a | 17940f3 | 8/9 | Q4 (the taught student matched the plain search on TEST in only 2 of 20) | not fully blind (GATE seen before the seal: its disclosure says how) · record carries timings |
 | 17 | the hero: the signed pass, the router (rules, memory, key within its limit), the fixed opening and recycling | a77e1cb | 401494a | 7/7 | none | not fully blind (its disclosure says how) · record carries timings |
+| 18 | the gear: the estate’s 100 builds as Hands cards made from the socket record; gear only when the kard checks and its own tests passed on GitHub | e01bda4 | 3e79e04 | 7/7 | none | not fully blind (its disclosure says how) |
 
 To re-verify any organ (fast, no measurement): `node tools/order.mjs --organ k` (the seal came first, every pinned file
 unchanged between seal and record) then `node tools/judge-k.mjs --check` (the committed verdict is exactly what the sealed
