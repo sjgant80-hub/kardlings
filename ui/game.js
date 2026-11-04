@@ -41,6 +41,7 @@ import { mark, MAX_TRIES } from '../src/learn.mjs';
 import { join, leave, guildOf, MAX_STATEMENTS } from '../src/guild.mjs';
 import { offered, shownDesc, sayOutcome, SHOWN_AS, ORGANS } from '../src/copy.mjs';
 import { paintRaid, paintChapter } from '../vendor/pixelwhisperer/kards/raid.mjs';
+import { paintSheet, paintBook } from '../vendor/pixelwhisperer/kards/build.mjs';
 import { jobsOf, recipeOf, buildId, bookOf, doesJob, ZERO as BUILD_ZERO } from '../src/build.mjs';
 import { studentOf } from '../src/shrink.mjs';
 import { utf8 } from '../vendor/dex-frontier/vendor/living-seed/vendor/keys/canon.mjs';
@@ -1618,6 +1619,24 @@ const bdEntry = (id) => bdEntries().find((e) => e.id === id) || null;
 const whoseCard = (v) => (v.owner === S.me.pub ? 'yours' : v.owner === S.maker.pub ? 'the drop' : 'key ' + api.short(v.owner));
 const VERDICT = { combo: '★ COMBO FOUND', anti: '✗ ANTI-COMBO', plain: 'PLAIN' };
 const signed = (x) => (x > 0 ? '+' : '') + six(x);
+/** the job a build's ground is for: its business and its world boss's bar, from the admission record */
+const jobFor = (data) => { const j = (admission ? jobsOf(admission) : []).find((x) => x.set === setOfData(data)); return j ? { set: j.set, bar: j.bar } : null; };
+/** a picture PixelWhisperer drew from the kernel's own records, on a canvas — or, if it refuses them, why, in words */
+function shareArt(art, label) {
+  if (!art.ok) return el('p', { class: 'g-small g-dim' }, 'The picture could not be drawn: ' + art.why);
+  const c = el('canvas', { class: 'g-sheetart', width: 800, height: 420, role: 'img', 'aria-label': label });
+  putRGB(c, art.px, 800, 420);
+  return c;
+}
+/** the build sheet: paintSheet reads the receipt and its proof exactly as the kernel emits them (data/contract/builds.json
+ *  holds real ones, and test/painters.test.mjs has the painter read every one) */
+function sheetArt(e) {
+  const job = jobFor(e.receipt.data), r = e.receipt;
+  if (!job) return null;
+  const sheet = { job, receipt: r, held: e.ids.filter((id) => api.lifeOf(id)) };
+  if (e.proof) sheet.proof = e.proof;
+  return shareArt(paintSheet(sheet, plotTheme(), 800, 420), 'The build sheet, drawn: ' + VERDICT[r.verdict].replace(/^[★✗] /, '') + ', ' + r.name + ', ' + six(r.gate) + ' on GATE against its best card’s ' + six(r.best) + (e.proof && e.proof.proven ? ', proven by ' + e.proof.keys.length + ' keys' : ''));
+}
 
 async function renderBuilds() {
   admission ||= await fetch('drop/admission.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
@@ -1705,6 +1724,7 @@ async function showBuild(e) {
   const proof = e.proof, n = proof ? proof.keys.length : 0;
   fill(bdOut(), el('p', { class: 'g-verdict ' + (r.verdict === 'combo' ? 'g-okt' : r.verdict === 'anti' ? 'g-badt' : '') }, VERDICT[r.verdict]),
     el('p', {}, el('b', {}, r.name)),
+    sheetArt(e),
     el('p', { class: 'g-small' }, 'The build scores ' + six(r.gate) + ' on GATE, out of fold · its best card alone ' + six(r.best) + ' · ' + (r.lift >= 0 ? 'lift ' : 'drop ') + signed(r.lift) + ' (a combo needs +0.005, an anti-combo is −0.005 or worse) · ' + r.n.toLocaleString() + ' cases'),
     el('ul', { class: 'g-lines' }, r.parts.map((p) => { const v = vOf.get(p.card); return line((p.joined ? 'k' : 'x') + ' g-two', (v ? '#' + pad4(v.serial) + ' ' : '') + p.title + (v ? ' · ' + whoseCard(v) : ''),
       el('small', {}, p.joined ? (p.domains + ' · its GATE ' + six(p.gate) + ' · alone in the build ' + six(p.alone) + ' · adds ' + signed(p.contribution)) : ('on the bench: ' + p.why))); })),
@@ -1777,6 +1797,7 @@ function renderBuildBook(b) {
   const jobs = book.ok ? Object.entries(book.jobs) : [];
   if (!jobs.length) return fill(box, el('p', { class: 'g-dim g-small' }, 'Nothing proven on this device yet. Measure a build, sign your re-run, and send its code to a friend to sign theirs: two different keys make it proven.'));
   fill(box, jobs.map(([data, j]) => el('div', { class: 'g-bookjob' }, el('h4', {}, SETS[setOfData(data)] ? SETS[setOfData(data)].title : setOfData(data)),
+    jobFor(data) ? shareArt(paintBook({ job: jobFor(data), page: j }, plotTheme(), 800, 420), 'The build book’s page for ' + (SETS[setOfData(data)] ? SETS[setOfData(data)].title : setOfData(data)) + ', drawn: ' + j.combos.length + ' proven combo' + (j.combos.length === 1 ? '' : 's') + ', ' + j.anti.length + ' anti-combo' + (j.anti.length === 1 ? '' : 's') + ', ' + j.plain + ' plain') : null,
     el('ol', { class: 'g-lines' }, [...j.combos.map((c) => line('k g-two', '★ ' + c.name, el('small', {}, six(c.gate) + ' · lift ' + signed(c.lift) + ' · found by ' + (c.finder === S.me.pub ? 'you' : api.short(c.finder)) + ' · ' + c.keys + ' keys'))),
       ...j.anti.map((c) => line('x g-two', '✗ ' + c.name, el('small', {}, six(c.gate) + ' · drop ' + signed(c.lift) + ' · together they do worse than the best of them'))),
       j.plain ? line('g-two', j.plain + ' plain build' + (j.plain === 1 ? '' : 's'), el('small', {}, 'proven, and neither a combo nor an anti-combo')) : null].filter(Boolean)))));

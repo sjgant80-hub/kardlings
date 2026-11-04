@@ -28,6 +28,8 @@ import { utf8 } from './vendor/dex-frontier/vendor/living-seed/vendor/keys/canon
 import { sha256Hex, sha256Bytes } from './vendor/dex-frontier/vendor/living-seed/vendor/seed-library/sha256.mjs';
 import { probeOffline } from './vendor/dex-frontier/vendor/living-seed/vendor/seed-library/seedlib.mjs';
 import { costCase, tokensOf } from './src/cost.mjs';
+import { teamCase, sourcesOf as basisSources } from './src/teamcase.mjs';
+const BASIS = 'vendor/sovereign-enterprise/data/basis.json';
 
 // ── small helpers: every text a card carries is set as text, never as markup ─────────────────────────────────────────
 const $ = (s) => document.querySelector(s);
@@ -633,8 +635,30 @@ async function costRun() {
         ' Cheap cloud models are cheap per case — the difference that matters is that every rented answer is a record handed to a processor, and every card answer is not.'),
       el('div', { class: 'tw' }, el('table', {}, el('thead', {}, el('tr', {}, ['', 'Per case', 'Year 1', 'Year 2', 'Year 3'].map((h) => el('th', {}, h)))), el('tbody', {}, ['hand', 'rented', 'card'].map((k) => el('tr', {}, el('td', {}, { hand: 'By hand', rented: 'Rented model', card: 'Kardling card' }[k]), el('td', { class: 'num' }, gbp(r.perCase[k])), r.years.map((y) => el('td', { class: 'num' }, gbp(y[k])))))))),
       el('p', { class: 'dim', style: 'font-size:13px' }, 'Measured here: ' + ms.toFixed(4) + ' ms per case (card #' + String(best.serial).padStart(4, '0') + ', ' + best.domain + '). A case sent to a model: about ' + tokensOf(text) + ' tokens in (the record and the question, at about four characters a token), 2 out. Staff and electricity rise with CPI (' + (r.used.cpi * 100).toFixed(1) + '%); token prices are the provider’s today. Sources: ',
-        r.used.sources.map((s, k) => [k ? ', ' : '', el('a', { href: s.source }, s.id), ' (' + s.checked + ')']), '.'));
+        r.used.sources.flatMap((s, k) => [k ? ', ' : '', el('a', { href: s.source }, s.id), ' (' + s.checked + ')']), '.'));
+    // against what the team pays now: the same cases and minutes, the reader's share and seats, the milliseconds just measured
+    const vs = $('#vs-out'), basis = await fetch(BASIS).then((x) => x.json());
+    const share = Math.min(1, Math.max(0, Number($('#cost-share').value) || 0)), seats = Math.max(0, Math.round(Number($('#cost-seats').value) || 0));
+    const t = teamCase(basis, { cases: monthly, minutes: Math.max(0.1, Number($('#cost-minutes').value) || 1), share, seats, tokensIn: tokensOf(text), tokensOut: 2, ms: Math.max(1e-6, ms), years: r.years.length });
+    if (!t.ok) return say(vs, t.why, 'bad');
+    const routes = [['today', 'Today, in staff time', 0], ['rentSeats', 'With a rented assistant for ' + seats + (seats === 1 ? ' person' : ' people'), 0], ['cloudApi', 'A frontier cloud model on every case', t.recordsOut], ['cloudAws', 'An open model on AWS on every case', t.recordsOut], ['own', 'Your own Kardling cards', 0]];
+    const than = (v, what) => kpi(gbp(Math.abs(v)), (v < 0 ? 'more' : 'less') + ' than ' + what + ', ' + t.inputs.years + ' years');   // said either way, never a minus sign to misread
+    clear(vs, el('div', { class: 'kpis' }, kpi(gbp(t.savingOver), 'staff time the cards take off, ' + t.inputs.years + ' years'), than(t.versus.seats, 'adding the rented assistants'), than(t.versus.cloud, 'the frontier cloud route'), than(t.versus.aws, 'the open model on AWS')),
+      el('div', { class: 'tw' }, el('table', {}, el('thead', {}, el('tr', {}, ['', 'A year', 'Over ' + t.inputs.years + ' years', 'Records sent out'].map((h) => el('th', {}, h)))),
+        el('tbody', {}, routes.map(([k, label, sentOut]) => el('tr', {}, el('td', {}, label), el('td', { class: 'num' }, gbp(t.perYear[k])), el('td', { class: 'num' }, gbp(t.over[k])), el('td', { class: 'num' }, sentOut.toLocaleString('en-GB'))))))),
+      el('p', {}, el('b', {}, 'The assistants add ' + gbp(t.lines.seats) + ' a year and take no case off. Either cloud route takes the same ' + Math.round(share * 100) + '% of the time off as the cards and bills ' + gbp(t.lines.api) + ' (frontier) or ' + gbp(t.lines.aws) + ' (AWS) a year for it, sending ' + t.recordsOut.toLocaleString('en-GB') + ' records out of the building; the cards send none, and their electricity is ' + gbp(t.lines.power) + ' a year.'),
+        ' At volumes like these the cloud bill is small; what separates the routes is the staff time an AI takes off and whether your records leave the building.'),
+      el('p', { class: 'dim', style: 'font-size:13px' }, 'Staff time: ' + t.inputs.cases.toLocaleString('en-GB') + ' cases a month × ' + t.inputs.minutes + (t.inputs.minutes === 1 ? ' minute' : ' minutes') + ' at the median hourly wage = ' + gbp(t.lines.staff) + ' a year; every year after the first rises by CPI. A case sent to a cloud model: ' + t.inputs.tokensIn + ' tokens in, ' + t.inputs.tokensOut + ' out. The cards: ' + ms.toFixed(4) + ' ms a case, measured here, at the laptop chip’s rated power. Every figure and its source is listed above.'));
   } catch (e) { say(out, String(e.message || e), 'bad'); }
+}
+
+/** every figure the team case reads, from the vendored basis, with its source: shown before anything is computed */
+async function renderBasis() {
+  const basis = await fetch(BASIS).then((r) => r.json()).catch(() => null);
+  if (!basis) return;
+  const figure = (k) => { const b = basis[k]; return k === 'frontier' || k === 'bedrockGptOss120b' ? b.inPerM + ' in / ' + b.outPerM + ' out, ' + b.unit : k === 'cpi' ? (b.value * 100).toFixed(1) + '% a year' : b.value + (b.unit ? ' ' + b.unit : ''); };
+  clear($('#vs-sources'), el('details', { 'data-quote': 'sourced' }, el('summary', {}, 'Every figure this case reads, with its source (' + basisSources(basis).length + ', from the estate’s sourced basis)'),
+    el('ul', {}, basisSources(basis).map((s) => el('li', {}, s.what + ': ' + figure(s.key) + ' — ', el('a', { href: s.source }, 'source'), s.via ? ' (' + s.via + ')' : '')))));
 }
 
 /** every price the cost case reads, shown before anything is computed: the lock's entries with their sources and dates */
@@ -747,6 +771,7 @@ async function boot() {
   try { const t = localStorage.getItem('digi-theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
   wire();
   renderPrices();   // the sourced prices need nothing from the drop
+  renderBasis();    // nor does the basis the team case reads
   const status = $('#boot');
   try { await generate(); } catch { $('#nocrypto').hidden = false; say(status, 'This browser cannot sign or check Ed25519, which every card needs. Use a current Chrome, Edge, Firefox or Safari.', 'bad'); emit('failed', { why: 'no Ed25519' }); return; }
   S.me = await loadMe(); renderMe();

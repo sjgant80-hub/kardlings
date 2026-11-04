@@ -429,6 +429,9 @@ try {
     if (await until(`/COMBO FOUND|ANTI-COMBO|PLAIN|could not be measured/.test(document.querySelector('#g-bd-out').textContent)`, 120000, 'a build measured')) {
       const b = await js(`({ out: document.querySelector('#g-bd-out').innerText, parts: document.querySelectorAll('#g-bd-out li').length })`), kind = /COMBO FOUND/.test(b.out) ? 'a combo' : /ANTI-COMBO/.test(b.out) ? 'an anti-combo' : 'plain';
       (/The build scores \d\.\d{6} on GATE, out of fold · its best card alone \d\.\d{6}/.test(b.out) && b.parts >= 2 && /adds [+−-]?\d/.test(b.out)) ? seen.push('a build measured in the worker: ' + kind + ', ' + b.parts + ' cards, each with what it adds') : problems.push('the build: ' + b.out.replace(/\s+/g, ' ').slice(0, 180));
+      // PixelWhisperer's build sheet, drawn from the receipt as the kernel emitted it: a labelled canvas with pixels on it
+      const drew = (sel) => js(`(() => { const c = document.querySelector('${sel} canvas.g-sheetart'); if (!c || !c.getAttribute('aria-label')) return 0; const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4 * 97) if (d[i] || d[i + 1] || d[i + 2]) n++; return n; })()`);
+      (await drew('#g-bd-out')) > 100 ? seen.push('the build sheet drawn by PixelWhisperer from the receipt') : problems.push('the build sheet was not drawn: ' + ((await js(`(document.querySelector('#g-bd-out') || {}).innerText`)) || '').replace(/\s+/g, ' ').slice(0, 160));
       await scan('a build');
       await js(`document.querySelector('#g-bd-sign').click()`);
       if (await until(`document.querySelector('#g-bd-sign').textContent.includes('✓')`, 120000, 'this key’s re-run signed')) {
@@ -446,6 +449,7 @@ try {
           (/★ Proven: 2 different keys measured it again to the very same numbers · found by you/.test(p.out) && /Telecom customers/.test(p.book) && /2 keys|3 keys/.test(p.book + p.out) && /Measured again here: the very same receipt/.test(p.out))
             ? seen.push('a build proven by two keys’ re-runs, found by this key, in the build book' + (kind === 'a combo' ? ' as a combo' : ''))
             : problems.push('the proof: ' + p.out.replace(/\s+/g, ' ').slice(0, 180) + ' · book: ' + p.book.replace(/\s+/g, ' ').slice(0, 80));
+          (await drew('#g-bd-book')) > 100 ? seen.push('the build book’s page drawn by PixelWhisperer from the book') : problems.push('the build book’s page was not drawn: ' + p.book.replace(/\s+/g, ' ').slice(0, 160));
         }
       }
       await js(`document.querySelector('#g-bd-shrink').click()`);

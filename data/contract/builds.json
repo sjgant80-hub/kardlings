@@ -1,0 +1,284 @@
+{
+ "kind": "kardlings.contract.builds",
+ "v": 1,
+ "note": "real records from the game’s own kernel, as it emits them, for the painters: made by tools/contract.mjs from the drop’s cards, re-run and signed by two demo keys from public phrases; CI makes them again byte for byte",
+ "keys": [
+  {
+   "phrase": "digi-card/organs/owner/contract-finder",
+   "pub": "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b"
+  },
+  {
+   "phrase": "digi-card/organs/owner/contract-second",
+   "pub": "b554cb2dad02ab31c66ecafa13a4bf80d10b48f840bd1aae5594429cc367d7fb"
+  }
+ ],
+ "records": [
+  {
+   "job": {
+    "set": "adult",
+    "bar": 817504
+   },
+   "serials": [
+    266,
+    762,
+    13
+   ],
+   "held": [
+    "920099f0a2f664a4",
+    "cb2f70ba01636d20",
+    "0d8102a969de9bf0"
+   ],
+   "build": {
+    "type": "digi.build.v1",
+    "data": "adult:af812aee8c359eea",
+    "parts": [
+     {
+      "card": "0d8102a969de9bf0",
+      "head": "76e2ffa9267da9633063a791c878880dae511f3561f8ef132b70990efa9b8f31"
+     },
+     {
+      "card": "920099f0a2f664a4",
+      "head": "bd590fd7af4fe83dae9f0a748db7a69ee0b273b97941c02c3091a5c20a25cc20"
+     },
+     {
+      "card": "cb2f70ba01636d20",
+      "head": "980d94573fe607b36192e5aa6c8754e8755e51dbbf6f9cad31f47a3605382466"
+     }
+    ],
+    "from": "0000000000000000000000000000000000000000000000000000000000000000"
+   },
+   "receipt": {
+    "kind": "build",
+    "build": "d39dd47aa3c5cb15af04f12de06e03e21a9139873b23b61076bee3b577e73a9d",
+    "data": "adult:af812aee8c359eea",
+    "parts": [
+     {
+      "card": "0d8102a969de9bf0",
+      "head": "76e2ffa9267da9633063a791c878880dae511f3561f8ef132b70990efa9b8f31",
+      "title": "Adult Tax",
+      "domains": "adult-tax",
+      "gate": 632076,
+      "joined": true,
+      "why": null,
+      "alone": 619285,
+      "contribution": 18125
+     },
+     {
+      "card": "920099f0a2f664a4",
+      "head": "bd590fd7af4fe83dae9f0a748db7a69ee0b273b97941c02c3091a5c20a25cc20",
+      "title": "Adult Person",
+      "domains": "adult-person",
+      "gate": 813871,
+      "joined": true,
+      "why": null,
+      "alone": 811465,
+      "contribution": 86613
+     },
+     {
+      "card": "cb2f70ba01636d20",
+      "head": "980d94573fe607b36192e5aa6c8754e8755e51dbbf6f9cad31f47a3605382466",
+      "title": "Adult Work",
+      "domains": "adult-work",
+      "gate": 766144,
+      "joined": true,
+      "why": null,
+      "alone": 763946,
+      "contribution": 42017
+     }
+    ],
+    "fielded": 3,
+    "gate": 890793,
+    "best": 811465,
+    "lift": 79328,
+    "n": 8140,
+    "verdict": "combo",
+    "name": "Adult Person × Adult Work × Adult Tax"
+   },
+   "reruns": [
+    {
+     "type": "digi.rerun.v1",
+     "receipt": "8c100d49af573c33e7bdddebfb35bef1c4eeb3a60c761fabbbae8dde22c4b177",
+     "by": "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b",
+     "sig": "42d23293f4233e810d91bce5ab989c9d95805884ad8075db9bdc232a1258e9ea65166cd5eeacd5cd6b3aefeef854a9b297688d794e04c7f89d00916f5dabaa0b"
+    },
+    {
+     "type": "digi.rerun.v1",
+     "receipt": "8c100d49af573c33e7bdddebfb35bef1c4eeb3a60c761fabbbae8dde22c4b177",
+     "by": "b554cb2dad02ab31c66ecafa13a4bf80d10b48f840bd1aae5594429cc367d7fb",
+     "sig": "f255de77c55ed8efab57f4f271a51183372b15ed3baed0e236cde35114f46b6de7d848672dc8470ff8c1570d3d33a4405658126e2aae4a0f9927b414e406160f"
+    }
+   ],
+   "proof": {
+    "ok": true,
+    "verdict": "combo",
+    "proven": true,
+    "keys": [
+     "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b",
+     "b554cb2dad02ab31c66ecafa13a4bf80d10b48f840bd1aae5594429cc367d7fb"
+    ],
+    "finder": "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b",
+    "refused": []
+   },
+   "page": {
+    "combos": [
+     {
+      "id": "8c100d49af573c33e7bdddebfb35bef1c4eeb3a60c761fabbbae8dde22c4b177",
+      "build": "d39dd47aa3c5cb15af04f12de06e03e21a9139873b23b61076bee3b577e73a9d",
+      "name": "Adult Person × Adult Work × Adult Tax",
+      "gate": 890793,
+      "best": 811465,
+      "lift": 79328,
+      "fielded": 3,
+      "finder": "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b",
+      "keys": 2
+     }
+    ],
+    "anti": [],
+    "plain": 0,
+    "best": 890793
+   }
+  },
+  {
+   "job": {
+    "set": "telco",
+    "bar": 828213
+   },
+   "serials": [
+    994,
+    977,
+    348,
+    379
+   ],
+   "held": [
+    "34c29df36962eb73",
+    "28dd2bf8837a01c0",
+    "464a439df1a8c60f",
+    "8fff56c9e7edeef0"
+   ],
+   "build": {
+    "type": "digi.build.v1",
+    "data": "telco:06192f32214eccf4",
+    "parts": [
+     {
+      "card": "28dd2bf8837a01c0",
+      "head": "c83aa4762687fd9b70706a7af4a10f012b99d66eb2f8148338e7382741609a57"
+     },
+     {
+      "card": "34c29df36962eb73",
+      "head": "5a3f0f8b4fff9e688ef5f52f46b47efaf7c917112395ee3101528b1947d574e3"
+     },
+     {
+      "card": "464a439df1a8c60f",
+      "head": "d87949e0ed8278c6f35c2daa63d8a07d244bae1b2430571c885b554b3e91aefa"
+     },
+     {
+      "card": "8fff56c9e7edeef0",
+      "head": "7f948f8e1bea66b82717eb3e1d4ac4a01bb47c58b21ae4732bc5b0b476742e1f"
+     }
+    ],
+    "from": "0000000000000000000000000000000000000000000000000000000000000000"
+   },
+   "receipt": {
+    "kind": "build",
+    "build": "39365bfcd56d9c35c8b51d536a242f00a5cd2e7d1d8063a590ffb1b4c8f07701",
+    "data": "telco:06192f32214eccf4",
+    "parts": [
+     {
+      "card": "28dd2bf8837a01c0",
+      "head": "c83aa4762687fd9b70706a7af4a10f012b99d66eb2f8148338e7382741609a57",
+      "title": "Telco Customer",
+      "domains": "telco-customer",
+      "gate": 677382,
+      "joined": true,
+      "why": null,
+      "alone": 666636,
+      "contribution": 4998
+     },
+     {
+      "card": "34c29df36962eb73",
+      "head": "5a3f0f8b4fff9e688ef5f52f46b47efaf7c917112395ee3101528b1947d574e3",
+      "title": "Telco Account",
+      "domains": "telco-account",
+      "gate": 820305,
+      "joined": true,
+      "why": null,
+      "alone": 811492,
+      "contribution": 45563
+     },
+     {
+      "card": "464a439df1a8c60f",
+      "head": "d87949e0ed8278c6f35c2daa63d8a07d244bae1b2430571c885b554b3e91aefa",
+      "title": "Telco Services",
+      "domains": "telco-services",
+      "gate": 777880,
+      "joined": true,
+      "why": null,
+      "alone": 773528,
+      "contribution": 19302
+     },
+     {
+      "card": "8fff56c9e7edeef0",
+      "head": "7f948f8e1bea66b82717eb3e1d4ac4a01bb47c58b21ae4732bc5b0b476742e1f",
+      "title": "Telco Account",
+      "domains": "telco-account",
+      "gate": 820043,
+      "joined": false,
+      "why": "a better-proven part fields telco-account",
+      "alone": null,
+      "contribution": null
+     }
+    ],
+    "fielded": 3,
+    "gate": 840751,
+    "best": 811492,
+    "lift": 29259,
+    "n": 1232,
+    "verdict": "combo",
+    "name": "Telco Account × Telco Services × Telco Customer"
+   },
+   "reruns": [
+    {
+     "type": "digi.rerun.v1",
+     "receipt": "c878dedf714fc1b006e0e13d1a1bf705e10890012d8ac19d50418a82542d3c28",
+     "by": "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b",
+     "sig": "4be9554ea0e41be0c534881bf205f11c90b5bbec6c2bb72ce720663cd8a2a85aa75a073372dd5951400360d7c0f7911a895e4ac85937a14948c8c811654ec607"
+    },
+    {
+     "type": "digi.rerun.v1",
+     "receipt": "c878dedf714fc1b006e0e13d1a1bf705e10890012d8ac19d50418a82542d3c28",
+     "by": "b554cb2dad02ab31c66ecafa13a4bf80d10b48f840bd1aae5594429cc367d7fb",
+     "sig": "65336c9f4b06a470ed9ab7835f0f7b31a245c6e21d1e7b5e5b72822d3f04408a8d79b02c554616e8289d4c31ef317a878c2f303b74cf3e286a9fc1a79cf3ee05"
+    }
+   ],
+   "proof": {
+    "ok": true,
+    "verdict": "combo",
+    "proven": true,
+    "keys": [
+     "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b",
+     "b554cb2dad02ab31c66ecafa13a4bf80d10b48f840bd1aae5594429cc367d7fb"
+    ],
+    "finder": "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b",
+    "refused": []
+   },
+   "page": {
+    "combos": [
+     {
+      "id": "c878dedf714fc1b006e0e13d1a1bf705e10890012d8ac19d50418a82542d3c28",
+      "build": "39365bfcd56d9c35c8b51d536a242f00a5cd2e7d1d8063a590ffb1b4c8f07701",
+      "name": "Telco Account × Telco Services × Telco Customer",
+      "gate": 840751,
+      "best": 811492,
+      "lift": 29259,
+      "fielded": 3,
+      "finder": "0750215cf2e571fafa48f14c4402ea986057b4b86c4cd6e6b2d0fffc739c950b",
+      "keys": 2
+     }
+    ],
+    "anti": [],
+    "plain": 0,
+    "best": 840751
+   }
+  }
+ ]
+}

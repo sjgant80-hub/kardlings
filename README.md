@@ -77,8 +77,8 @@ minted as a signed item, handed on by signed gives; it moves no score, and the p
 
 ## What was proven
 
-Seventeen organs, each sealed before it was measured (organs 6 and 10 to 17 are not fully blind, each disclosing why on Proof; git proves the order: `node tools/order.mjs --organ k`), judged by
-their sealed rules alone — **95 of 102 sealed rules held; 6 failed predictions are kept; 1 property failed and is kept:** organ 12 found two real
+Eighteen organs, each sealed before it was measured (organs 6 and 10 to 18 are not fully blind, each disclosing why on Proof; git proves the order: `node tools/order.mjs --organ k`), judged by
+their sealed rules alone — **102 of 109 sealed rules held; 6 failed predictions are kept; 1 property failed and is kept:** organ 12 found two real
 tournament brackets that never named a champion, and organ 13, sealed first, measured the fix (`node tools/superseded.mjs --organ 12`).
 
 | Organ | Result |
@@ -100,8 +100,9 @@ tournament brackets that never named a champion, and organ 13, sealed first, mea
 | 15 · the guild (not fully blind: the kernel was gated before the seal; see Proof) | 379/379 guilds stood exactly as their keys signed, all 1,895 attacks refused with their reasons, 21/21 past twelve refused; the same in any order; every estate drawn exactly as signed; 274/274 members who signed a drop card wrongly caught by the drop; a guild of twelve read in a median 16 ms |
 | 16 · builds and combos, and the shrink (not blind on GATE: smoke- and dry-run before the seal; see Proof) | 80/80 builds measured again to the very same receipt by two keys and worked out again apart from the kernel; 80/80 proven, 80/80 attack sets refused; 20/20 shrinks checked deeply. 61 of 68 combos found on GATE beat their best card on TEST (89.7%; median lift 0.028 on GATE, 0.016 on TEST); 3 of 4 kept students beat their best source on TEST; **failed, kept:** only 2 of 20 taught students matched the same search on the true answers on TEST |
 | 17 · the hero (not fully blind: the kernel was gated and played before the seal; see Proof) | 120/120 heroes crowned and checked exactly; 1,800/1,800 tampered passes refused; the opening the same bytes every time and a page that only grows; the limit wall exact over 6,000 routed questions; 360/360 questions its rules answer kept on the rules, 600/600 off-business questions sent to the key; a repeated opening read 97% faster on a local 7B and 1B (controls: nothing saved) |
+| 18 · the gear (not fully blind: the kernel was gated and the screen played on the very record before the seal; see Proof) | 100/100 builds of fall-kit’s socket record of 25 October made cards, 100/100 live pages answered 200, 100 faces painted in all 5 themes; gear exactly as the runs read, 100/100 proofs right; 600/600 tampered rows caught; 75 of 100 cards are gear, every one of 11 kinds of tool has gear; 47 of 48 of mint-an-app’s tested apps of 10 October still gear; 63/63 cards that fit every stud are gear |
 
-Every kernel is witness CLEAN (1,082/1,082 mutants killed on GitHub’s runner at 8062362, run 39722326600) and CI re-proves all of it on every push.
+Every kernel is mutation-gated by witness v0.6 — the estate’s harness, byte for byte (`.witness/PIN.json`; CI clones the tag and refuses to run the gate if a byte differs) — on GitHub’s runner on every push, nothing baselined. Each run writes a receipt (the harness, the commit and run, every kernel’s SHA-256 and its count), uploaded as the run’s `witness-receipt` artifact.
 
 ## Run it
 
@@ -109,10 +110,11 @@ Every kernel is witness CLEAN (1,082/1,082 mutants killed on GitHub’s runner a
 node --test test/*.test.mjs        # every kernel, fuzzed
 node witness-all.mjs               # the mutation gate over every kernel
 node tools/vendor-check.mjs        # vendored code byte-identical to its sources
+node tools/contract.mjs --check    # the shared build records are the kernel’s own, made again byte for byte
 node tools/drop-check.mjs          # the drop re-runs from decoder #0001; every genesis mind re-grows to its declared score
 node tools/page-check.mjs          # the page gate
 node tools/ui-play.mjs             # the game view, played from nothing in a headless browser
-node tools/order.mjs --organ 1     # an organ was sealed before it was measured (1 to 8)
+node tools/order.mjs --organ 1     # an organ was sealed before it was measured (1 to 18)
 node tools/judge-1.mjs --check     # and its verdict is what the sealed rules give
 node tools/genesis.mjs --searches  # every search behind the drop (cached in drop/searches.jsonl)
 node tools/genesis.mjs --mint      # the drop itself (--key <file> to seal it with your own maker key)
@@ -145,14 +147,19 @@ or sent by the tools: a person does that.
 | `src/mesh.mjs` | consent, the join rule, measured shares, a replayable ledger of credits |
 | `src/claims.mjs` | the claim gate for every public post |
 | `src/drop.mjs` | the genesis and decoder #0001 |
-| `src/cost.mjs` | the cost case, from sourced prices only |
+| `src/cost.mjs` | the cost case per case, from sourced prices only |
+| `src/teamcase.mjs` | the case against what a team pays now (staff time, rented assistants, a frontier cloud model, an open model on AWS, its own cards), every outside figure from `vendor/sovereign-enterprise/data/basis.json`, the inputs the reader’s own |
 | `src/arena.mjs` | duels: both owners sign, the batch comes from both signatures, the better ranking wins, ratings from a published table |
 | `src/raid.mjs` | raids: the unsolved departments as bosses, signed strikes anyone re-checks, the first card of a fallen boss as loot; world bosses, party strikes assembled as a mesh, receipts that re-run |
 | `src/kit.mjs` | the kit: slots from its issue, the owner's signed loadout, the kitted mind with what each slot adds, kit duels |
 | `src/item.mjs` | app items: an estate app exactly as mint-an-app's records hold it, minted and handed on by signature |
+| `src/build.mjs` · `src/shrink.mjs` | builds and combos, proven by two keys; the shrink of a build into one small card |
+| `src/hero.mjs` · `src/gear.mjs` | the hero (crowned pass, router, recycled opening) and the gear (Hands cards from fall-kit’s socket record) |
 | `src/earn.mjs` | the record: a player's releases and measured party shares as entries of the credits ledger |
 | `vendor/mint-an-app/` | mint-an-app's records of the estate's apps (which are mintable, their tier, commit and CI run), byte for byte |
 | `vendor/kcc-mesh/` | the credits ledger and its DIGI gate, byte for byte |
+| `vendor/sovereign-enterprise/` | the estate’s sourced basis (wages, CPI, electricity, chip power, rented assistants, cloud and AWS model rates, exchange), byte for byte |
+| `data/contract/builds.json` | the shared records contract: two real builds measured, re-run by two demo keys, proven and put in the book by the kernel itself (`node tools/contract.mjs`; CI makes it again byte for byte with `--check`), which `test/painters.test.mjs` has PixelWhisperer’s vendored build sheet and book painters read as they are |
 | `data/organ-*/` | eighteen organs: sealed claims, records, verdicts (and organ 12’s superseded record) |
 | `drop/` | the manifest, the genesis log, every search |
 | `decoder/v1/` | the exact files that read a card, frozen at the drop |
