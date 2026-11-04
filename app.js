@@ -661,6 +661,39 @@ async function renderBasis() {
     el('ul', {}, basisSources(basis).map((s) => el('li', {}, s.what + ': ' + figure(s.key) + ' — ', el('a', { href: s.source }, 'source'), s.via ? ' (' + s.via + ')' : '')))));
 }
 
+/** the blueprint's gate column: the mutation gate's own receipt from GitHub's runner (data/witness/receipt.json, the run's
+ *  artifact committed as it came), each kernel's count, and whether this page serves the very bytes that run judged */
+const GATE = 'data/witness/receipt.json', REPO = 'https://github.com/sjgant80-hub/kardlings';
+async function bytesHash(path) {
+  const buf = new Uint8Array(await fetch(path, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(path); return r.arrayBuffer(); }));
+  const d = globalThis.crypto && crypto.subtle ? new Uint8Array(await crypto.subtle.digest('SHA-256', buf)) : sha256Bytes(buf);
+  return Array.from(d, (b) => b.toString(16).padStart(2, '0')).join('');
+}
+async function renderGate() {
+  const cells = [...document.querySelectorAll('[data-gate]')], box = $('#gate-receipt');
+  const r = await fetch(GATE, { cache: 'no-cache' }).then((x) => (x.ok ? x.json() : null)).catch(() => null);
+  if (!r || r.kind !== 'kardlings.witness-receipt' || !Array.isArray(r.kernels)) {
+    cells.forEach((c) => { c.textContent = '—'; });
+    if (box) say(box, 'The mutation gate’s receipt could not be read on this device; every run of the gate is listed on GitHub (link below).', 'bad');
+    return;
+  }
+  const by = new Map(r.kernels.map((k) => [k.src, k])), n = (x) => Number(x).toLocaleString('en-GB');
+  let same = 0;
+  const hashes = await Promise.all(cells.map((c) => bytesHash(c.dataset.gate).catch(() => null)));
+  for (const [i, c] of cells.entries()) {
+    const k = by.get(c.dataset.gate);
+    if (!k) { c.textContent = '✗ not in the receipt'; c.style.color = 'var(--bad)'; continue; }
+    const match = hashes[i] === k.sha256;
+    if (match) same++;
+    clear(c, el('b', { style: 'color:var(--' + (k.clean ? 'accent' : 'bad') + ')' }, k.clean ? '✓ ' : '✗ '), 'witness ' + n(k.killed) + '/' + n(k.total) + ' killed', k.ignored ? ' · ' + k.ignored + ' reviewed-equivalent' : '',
+      el('br'), el('small', { class: 'dim' }, el('code', { 'data-quote': 'sourced' }, (k.tests || []).join(', ')), ' · ' + (match ? 'the very bytes served here' : 'changed since that run: the gate’s run on the newer commit judges them')));
+  }
+  const ignored = r.kernels.reduce((a, k) => a + (k.ignored || 0), 0), run = r.run ? REPO + '/actions/runs/' + r.run : null;
+  clear(box, el('p', {}, el('b', {}, (r.clean ? 'Clean: ' : 'Not clean: ') + n(r.killed) + ' of ' + n(r.total) + ' mutants killed'), ' over ' + r.kernels.length + ' kernels by witness ' + r.harness.tag + ' (commit ', el('code', {}, String(r.harness.commit).slice(0, 7)), ') on GitHub’s ' + r.runner + ' runner, judging commit ',
+    r.commit ? el('a', { href: REPO + '/commit/' + r.commit }, el('code', {}, r.commit.slice(0, 7))) : '—', run ? [' in ', el('a', { href: run }, 'run ' + r.run)] : '', ', finished ' + String(r.finished).slice(0, 10) + '. ' + (ignored ? ignored + ' mutants are reviewed-equivalent, each with its written reason.' : 'Nothing is baselined.') +
+    ' ' + same + ' of ' + cells.length + ' kernels served here are the very bytes that run judged. The receipt is the run’s own artifact, committed as it came: ', el('a', { href: GATE }, GATE), '.'));
+}
+
 /** every price the cost case reads, shown before anything is computed: the lock's entries with their sources and dates */
 async function renderPrices() {
   const lock = await fetch('data/prices.lock.json').then((r) => r.json()).catch(() => null);
@@ -772,6 +805,7 @@ async function boot() {
   wire();
   renderPrices();   // the sourced prices need nothing from the drop
   renderBasis();    // nor does the basis the team case reads
+  renderGate();     // nor the mutation gate's receipt
   const status = $('#boot');
   try { await generate(); } catch { $('#nocrypto').hidden = false; say(status, 'This browser cannot sign or check Ed25519, which every card needs. Use a current Chrome, Edge, Firefox or Safari.', 'bad'); emit('failed', { why: 'no Ed25519' }); return; }
   S.me = await loadMe(); renderMe();

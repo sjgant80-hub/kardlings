@@ -102,7 +102,7 @@ tournament brackets that never named a champion, and organ 13, sealed first, mea
 | 17 · the hero (not fully blind: the kernel was gated and played before the seal; see Proof) | 120/120 heroes crowned and checked exactly; 1,800/1,800 tampered passes refused; the opening the same bytes every time and a page that only grows; the limit wall exact over 6,000 routed questions; 360/360 questions its rules answer kept on the rules, 600/600 off-business questions sent to the key; a repeated opening read 97% faster on a local 7B and 1B (controls: nothing saved) |
 | 18 · the gear (not fully blind: the kernel was gated and the screen played on the very record before the seal; see Proof) | 100/100 builds of fall-kit’s socket record of 25 October made cards, 100/100 live pages answered 200, 100 faces painted in all 5 themes; gear exactly as the runs read, 100/100 proofs right; 600/600 tampered rows caught; 75 of 100 cards are gear, every one of 11 kinds of tool has gear; 47 of 48 of mint-an-app’s tested apps of 10 October still gear; 63/63 cards that fit every stud are gear |
 
-Every kernel is mutation-gated by witness v0.6 — the estate’s harness, byte for byte (`.witness/PIN.json`; CI clones the tag and refuses to run the gate if a byte differs) — on GitHub’s runner on every push, nothing baselined. Each run writes a receipt (the harness, the commit and run, every kernel’s SHA-256 and its count), uploaded as the run’s `witness-receipt` artifact.
+Every kernel is mutation-gated by witness v0.6 — the estate’s harness, byte for byte (`.witness/PIN.json`; CI clones the tag and refuses to run the gate if a byte differs) — on GitHub’s runner on every push, nothing baselined. Each run writes a receipt (the harness, the commit and run, every kernel’s SHA-256 and its count), uploaded as the run’s `witness-receipt` artifact; the last one is committed as it came in `data/witness/receipt.json`, and the page’s blueprint reads it, kernel by kernel, beside a check that it serves the very bytes judged. The receipt committed now is run 41893760094 on commit 903f530: 1,458 of 1,458 mutants killed over 28 kernels, nothing baselined.
 
 ## Run it
 
@@ -160,6 +160,7 @@ or sent by the tools: a person does that.
 | `vendor/kcc-mesh/` | the credits ledger and its DIGI gate, byte for byte |
 | `vendor/sovereign-enterprise/` | the estate’s sourced basis (wages, CPI, electricity, chip power, rented assistants, cloud and AWS model rates, exchange), byte for byte |
 | `data/contract/builds.json` | the shared records contract: two real builds measured, re-run by two demo keys, proven and put in the book by the kernel itself (`node tools/contract.mjs`; CI makes it again byte for byte with `--check`), which `test/painters.test.mjs` has PixelWhisperer’s vendored build sheet and book painters read as they are |
+| `data/witness/receipt.json` | the mutation gate’s last receipt from GitHub’s runner, as the run wrote it |
 | `data/organ-*/` | eighteen organs: sealed claims, records, verdicts (and organ 12’s superseded record) |
 | `drop/` | the manifest, the genesis log, every search |
 | `decoder/v1/` | the exact files that read a card, frozen at the drop |

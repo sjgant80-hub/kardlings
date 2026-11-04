@@ -12,6 +12,7 @@
 //   → PAGE OK | PAGE BROKEN (exit 1)
 import { readFileSync } from 'node:fs';
 import { copyHits, organ10Bare, pageText, ORGANS } from '../src/copy.mjs';
+import { PAIRS } from '../witness-all.mjs';
 
 const at = (p) => readFileSync(new URL('../' + p, import.meta.url), 'utf8');
 const html = at('index.html'), app = at('app.js') + '\n' + at('ui/game.js') + '\n' + at('ui/first.js') + '\n' + at('ui/hero.js'), problems = [];   // every script the page runs
@@ -52,6 +53,17 @@ if (!html.includes('Powered by the Konomi architecture, created by Thomas Frumki
 const SAID_N = ['none', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
 for (const [, w] of html.matchAll(/([A-Za-z]+) organs, each sealed before it was measured/g)) if (w.toLowerCase() !== SAID_N[ORGANS]) problems.push('the page says ' + w + ' organs, and there are ' + ORGANS);
 if (!html.includes('https://www.ai-nativesolutions.com')) problems.push('the supplier is missing');
+// the blueprint names every kernel the mutation gate judges, each with a cell its receipt fills (witness-all.mjs PAIRS)
+for (const [src] of PAIRS) if (!html.includes('<td class="num" data-gate="' + src + '">')) problems.push('the blueprint has no gate row for ' + src);
+for (const [, src] of html.matchAll(/data-gate="([^"]+)"/g)) if (!PAIRS.some(([s]) => s === src)) problems.push('the blueprint shows a gate for ' + src + ', which the mutation gate does not judge');
+// and the receipt it reads is a clean one from GitHub's runner, naming its commit and run, judging every kernel (bytes may be
+// newer than that run: the page says so kernel by kernel, and the next run's receipt replaces it)
+let gate = null; try { gate = JSON.parse(at('data/witness/receipt.json')); } catch { problems.push('data/witness/receipt.json, the mutation gate’s receipt the blueprint reads, is missing or does not parse'); }
+if (gate) {
+  if (gate.kind !== 'kardlings.witness-receipt' || gate.clean !== true || gate.runner !== 'Linux' || !/^[0-9a-f]{40}$/.test(String(gate.commit)) || !/^\d+$/.test(String(gate.run))) problems.push('the gate receipt is not a clean one from GitHub’s runner naming its commit and run');
+  for (const [src] of PAIRS) { const k = (gate.kernels || []).find((x) => x.src === src); if (!k || k.clean !== true || !(k.total > 0) || k.killed !== k.total) problems.push('the gate receipt does not show ' + src + ' judged clean'); }
+  if (JSON.parse(at('.witness/PIN.json')).commit !== (gate.harness || {}).commit) problems.push('the gate receipt was not written by the pinned witness');
+}
 // Gary W. Floyd's credit, in full, wherever the build draws on his papers (the estate's hard rule): full name, company, paper
 const GARY = 'Gary W. Floyd, Lumiea Systems Research Division — ThunderStruck Service LLC';
 for (const [name, text] of [['the page', html], ['NOTICE', at('NOTICE')], ['README.md', at('README.md')], ['llms.txt', at('llms.txt')]]) {

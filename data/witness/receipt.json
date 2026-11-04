@@ -1,0 +1,386 @@
+{
+ "kind": "kardlings.witness-receipt",
+ "v": 1,
+ "harness": {
+  "repo": "https://github.com/sjgant80-hub/witness.git",
+  "tag": "v0.6",
+  "commit": "f04fe3047e3d49b98c67713befd5b77182afa0d4",
+  "files": {
+   ".witness/witness.mjs": "9918297aa5f8fc4e1d26d9e6b25226f56102fdc04f0c634155bfcba1c086ef48",
+   ".witness/runner.mjs": "e85f13b1b30c40c045bcb7997a5d73808c14684dcd161c4a2ea14caaf47c3a0e"
+  }
+ },
+ "commit": "903f5301aa20118538b3573b1a3c97adbe631d0e",
+ "run": "41893760094",
+ "runner": "Linux",
+ "finished": "2026-11-04T19:33:25.031Z",
+ "clean": true,
+ "killed": 1458,
+ "total": 1458,
+ "kernels": [
+  {
+   "src": "src/dossier.mjs",
+   "tests": [
+    "test/dossier.test.mjs"
+   ],
+   "sha256": "6b92bc74ec5450dc1dca5e5f9edff8fbc78373bdd705bddf2c09126ffdf2f533",
+   "total": 77,
+   "killed": 77,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 26.8
+  },
+  {
+   "src": "src/card.mjs",
+   "tests": [
+    "test/card.test.mjs"
+   ],
+   "sha256": "96e456059c3b9924b2d8219cee3a712b4ec558cd65375b1f878a4347f5562b2a",
+   "total": 41,
+   "killed": 41,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 90.7
+  },
+  {
+   "src": "src/registry.mjs",
+   "tests": [
+    "test/registry.test.mjs"
+   ],
+   "sha256": "c3794bdf297350dc6c74ba6e655dfba1ea962c1656dba7ab291d644b16802b95",
+   "total": 32,
+   "killed": 32,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 8.3
+  },
+  {
+   "src": "src/data.mjs",
+   "tests": [
+    "test/data.test.mjs"
+   ],
+   "sha256": "e7964fc7d912bc1ae51c8fee0cab94b18df8c8758be3438a51b5ce3edda9ea4c",
+   "total": 30,
+   "killed": 30,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 46.9
+  },
+  {
+   "src": "src/mind.mjs",
+   "tests": [
+    "test/mind.test.mjs"
+   ],
+   "sha256": "da33ec2cedd5b06a58e7d42c6d541e03141381d51356dc7038366d31f8d1c839",
+   "total": 45,
+   "killed": 45,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 24.2
+  },
+  {
+   "src": "src/breed.mjs",
+   "tests": [
+    "test/breed.test.mjs"
+   ],
+   "sha256": "d1eaac9e3f49f0c3ab968abf325640590e6c5b095284fef1ca648e347e1244b6",
+   "total": 44,
+   "killed": 44,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 139.4
+  },
+  {
+   "src": "src/mesh.mjs",
+   "tests": [
+    "test/mesh.test.mjs"
+   ],
+   "sha256": "afe6dee22dbf4dab7e7568cfa873613e36ddf72623f773cd547ae460f2c378b0",
+   "total": 53,
+   "killed": 53,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 48.2
+  },
+  {
+   "src": "src/claims.mjs",
+   "tests": [
+    "test/claims.test.mjs"
+   ],
+   "sha256": "6819187ef731bade44fb3d6db501876918208e84f8c14f1e674b220dcb91ecee",
+   "total": 14,
+   "killed": 14,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 2.1
+  },
+  {
+   "src": "src/drop.mjs",
+   "tests": [
+    "test/drop.test.mjs"
+   ],
+   "sha256": "ff9f4fd712c388d8ba03e1922106fc824937c67f9c05c7037a370aaad2425256",
+   "total": 20,
+   "killed": 20,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 5.3
+  },
+  {
+   "src": "src/cost.mjs",
+   "tests": [
+    "test/cost.test.mjs"
+   ],
+   "sha256": "789ec292dba55d7fcc97355833ea621e8582782e61d11d972c12caf013a4b933",
+   "total": 17,
+   "killed": 17,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 2.5
+  },
+  {
+   "src": "src/arena.mjs",
+   "tests": [
+    "test/arena.test.mjs"
+   ],
+   "sha256": "cd9f19b0856a1a1b6f6fc9143462c4f09c9593a1ef4e6bd1119609e1cd5cae0d",
+   "total": 61,
+   "killed": 61,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 25.3
+  },
+  {
+   "src": "src/raid.mjs",
+   "tests": [
+    "test/raid.test.mjs"
+   ],
+   "sha256": "923678b0f5aeeb3ae0cc82c9ca0d3d68e4b2e19d8dbe67cbe6f520ab06bcccdd",
+   "total": 73,
+   "killed": 73,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 226.3
+  },
+  {
+   "src": "src/kit.mjs",
+   "tests": [
+    "test/kit.test.mjs"
+   ],
+   "sha256": "dee8b6cd5040317fd4fb79f962b2073b1d0b3cc493b8a86bf2e745f0a6e7be68",
+   "total": 113,
+   "killed": 113,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 146.5
+  },
+  {
+   "src": "src/item.mjs",
+   "tests": [
+    "test/item.test.mjs"
+   ],
+   "sha256": "271623f5805c44950feeaa02602a3e26c6527bb7ea645317b872710023dea13d",
+   "total": 55,
+   "killed": 55,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 16.2
+  },
+  {
+   "src": "src/earn.mjs",
+   "tests": [
+    "test/earn.test.mjs"
+   ],
+   "sha256": "d9ca375f433ecddfeef6f7219b7990b701b8b8700dfc0da1385f15221c31b511",
+   "total": 55,
+   "killed": 55,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 11.8
+  },
+  {
+   "src": "src/copy.mjs",
+   "tests": [
+    "test/copy.test.mjs"
+   ],
+   "sha256": "038e69ec98a442e5d151cb93f481701e4d8f316f03f518b9e18b1fc39efaf7af",
+   "total": 12,
+   "killed": 12,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 2
+  },
+  {
+   "src": "src/campaign.mjs",
+   "tests": [
+    "test/campaign.test.mjs"
+   ],
+   "sha256": "b1d1eb0cea7df4c81592fe106f18068a327990872ce8d6d6bd910a5575e107aa",
+   "total": 25,
+   "killed": 25,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 37.6
+  },
+  {
+   "src": "src/replay.mjs",
+   "tests": [
+    "test/replay.test.mjs"
+   ],
+   "sha256": "086b125ca78ae2208973917440303a41764d5340a88e50678ccd924cb7cca442",
+   "total": 19,
+   "killed": 19,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 6.3
+  },
+  {
+   "src": "src/tournament.mjs",
+   "tests": [
+    "test/tournament.test.mjs"
+   ],
+   "sha256": "997a335171ed38864dc5e6c0e03ff408e51591ed24eed820638b281f2c661bbf",
+   "total": 64,
+   "killed": 64,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 9.4
+  },
+  {
+   "src": "src/sandbox.mjs",
+   "tests": [
+    "test/sandbox.test.mjs"
+   ],
+   "sha256": "c108f3ed85b522bd001fc0defd1fac6cd0340ad450761b0a26a3fdfa26ddecf3",
+   "total": 23,
+   "killed": 23,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 3.3
+  },
+  {
+   "src": "src/talker.mjs",
+   "tests": [
+    "test/talker.test.mjs"
+   ],
+   "sha256": "7e8dcf0c8cc6dc8c792be1334ec411ed1d8a2aefb17573ba800ffda5d4bd05bc",
+   "total": 166,
+   "killed": 166,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 272.6
+  },
+  {
+   "src": "src/learn.mjs",
+   "tests": [
+    "test/learn.test.mjs"
+   ],
+   "sha256": "659bac328fe80435536473969c4bcb259550bf17d3be82fd17364e2456468e7d",
+   "total": 44,
+   "killed": 44,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 7.9
+  },
+  {
+   "src": "src/guild.mjs",
+   "tests": [
+    "test/guild.test.mjs"
+   ],
+   "sha256": "ae84bff7dfa61e7e5ade1f85353b6ffc0344841ed850b586f8ce1a00818b7bf0",
+   "total": 47,
+   "killed": 47,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 27.9
+  },
+  {
+   "src": "src/build.mjs",
+   "tests": [
+    "test/build.test.mjs"
+   ],
+   "sha256": "257fb8b88c8f410ab09d32fda2077a16e1b1d4e9f2c8671e9277d80cff4626ca",
+   "total": 94,
+   "killed": 94,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 178.1
+  },
+  {
+   "src": "src/shrink.mjs",
+   "tests": [
+    "test/shrink.test.mjs"
+   ],
+   "sha256": "aea95562211bc0f649813bd32fe9bd5d16b7c1eff55eb5f49d2daab935742457",
+   "total": 52,
+   "killed": 52,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 191.5
+  },
+  {
+   "src": "src/hero.mjs",
+   "tests": [
+    "test/hero.test.mjs"
+   ],
+   "sha256": "ad385e2076173f6ef90de40d614e9b97ca393c9340584fd1cb9baaf13595cd1c",
+   "total": 100,
+   "killed": 100,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 20.8
+  },
+  {
+   "src": "src/gear.mjs",
+   "tests": [
+    "test/gear.test.mjs"
+   ],
+   "sha256": "60f6c4a6bff3fb4621dbaeb35bff100ea4e93a22e5f9f228689e262041c3a30d",
+   "total": 57,
+   "killed": 57,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 9.6
+  },
+  {
+   "src": "src/teamcase.mjs",
+   "tests": [
+    "test/teamcase.test.mjs"
+   ],
+   "sha256": "3dff95f22dfb0f62910dbd301a8feb50c987ca4a5c7949cf3d90719bfdcc0217",
+   "total": 25,
+   "killed": 25,
+   "survived": 0,
+   "ignored": 0,
+   "clean": true,
+   "seconds": 3.7
+  }
+ ]
+}
