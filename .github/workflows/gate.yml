@@ -43,5 +43,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
+      # the harness is the estate's witness at tag v0.6, byte for byte: clone the tag, check it is the pinned commit, and
+      # refuse to run the gate if the committed .witness/ files are not exactly its bytes
+      - name: the mutation gate is witness v0.6, byte for byte
+        run: |
+          git clone --depth 1 --branch v0.6 https://github.com/sjgant80-hub/witness.git "$RUNNER_TEMP/witness-v0.6"
+          test "$(git -C "$RUNNER_TEMP/witness-v0.6" rev-parse HEAD)" = "$(node -p "require('./.witness/PIN.json').commit")"
+          cmp "$RUNNER_TEMP/witness-v0.6/witness.mjs" .witness/witness.mjs
+          cmp "$RUNNER_TEMP/witness-v0.6/runner.mjs" .witness/runner.mjs
+          echo "witness v0.6 at $(git -C "$RUNNER_TEMP/witness-v0.6" rev-parse --short HEAD): .witness/ is byte-identical"
       - name: the mutation gate over every kernel
-        run: node witness-all.mjs
+        run: node witness-all.mjs --json out/witness-receipt.json
+      - name: the gate's receipt (every kernel's bytes and count, this commit, this run)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: witness-receipt, path: out/witness-receipt.json, if-no-files-found: ignore }

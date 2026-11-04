@@ -1,0 +1,11 @@
+{
+ "kind": "kardlings.witness-pin",
+ "note": "the mutation gate's harness, byte for byte from the estate's witness repository at tag v0.6; CI clones that tag and refuses to run the gate if these files differ from it",
+ "repo": "https://github.com/sjgant80-hub/witness.git",
+ "tag": "v0.6",
+ "commit": "f04fe3047e3d49b98c67713befd5b77182afa0d4",
+ "files": {
+  ".witness/witness.mjs": { "from": "witness.mjs", "sha256": "9918297aa5f8fc4e1d26d9e6b25226f56102fdc04f0c634155bfcba1c086ef48" },
+  ".witness/runner.mjs": { "from": "runner.mjs", "sha256": "e85f13b1b30c40c045bcb7997a5d73808c14684dcd161c4a2ea14caaf47c3a0e" }
+ }
+}

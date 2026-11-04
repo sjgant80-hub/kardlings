@@ -1,11 +1,14 @@
 #!/usr/bin/env node
-// witness-all.mjs — the mutation + fuzz gate over the DEX frontier’s own kernels (vendored from living-seed’s, with its
-// harness). Each kernel is mutated (comparisons, logic, booleans, ±1) and its tests must kill every mutant, or the
-// survivor is reviewed and written down with a reason. The vendored living-seed kernels are gated in living-seed.
+// witness-all.mjs — the mutation gate over every one of Kardlings' own kernels (src/), on the estate's witness harness at
+// tag v0.6, byte for byte (.witness/, pinned in .witness/PIN.json; CI clones the tag and refuses to run if the bytes
+// differ). Each kernel is mutated (comparisons, logic, booleans, ±1) and its tests must kill every mutant, or the survivor
+// is reviewed and written down with a reason. Vendored kernels are gated in their own repositories.
+//   node witness-all.mjs [src/x.mjs ...] [--json <file>]   (--json writes the receipt: each kernel's bytes and its count)
 import { runMutations } from './.witness/witness.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -64,20 +67,25 @@ export const PAIRS = [
 if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) main();
 
 function main() {
-const only = process.argv.slice(2);
+const argv = process.argv.slice(2), at = argv.indexOf('--json');
+const out = at === -1 ? null : argv[at + 1];
+if (at !== -1 && !out) { console.log('WITNESS NOT RUN — --json needs a file to write the receipt to'); process.exit(1); }
+const only = argv.filter((a, i) => at === -1 || (i !== at && i !== at + 1));
+const sha = (p) => createHash('sha256').update(readFileSync(join(HERE, p))).digest('hex');
 // a name that matches no kernel judges nothing — and nothing judged must never print CLEAN
 const unknown = only.filter((o) => !PAIRS.some(([src]) => src === o));
 if (unknown.length) { console.log(`WITNESS NOT RUN — no kernel named ${unknown.join(', ')} (name it as its path, e.g. src/oversight.mjs)`); process.exit(1); }
-let allClean = true; const rows = [];
+let allClean = true; const rows = [], kernels = [];
 for (const [src, tests] of PAIRS) {
   if (only.length && !only.includes(src)) continue;
   if (!existsSync(join(HERE, src))) continue;
-  const t0 = Date.now();
+  const t0 = Date.now(), bytes = sha(src);   // the bytes judged, read before any mutant is written
   // code the masker would hide is never mutated — refuse to judge rather than report a clean that skipped it
   const hidden = hiddenSpans(readFileSync(join(HERE, src), 'utf8'));
   if (hidden.length) {
     console.log(`✗ ${src.padEnd(16)} HIDDEN CODE — a stray quote hides lines ${hidden.map(([a, b]) => a + '–' + b).join(', ')} from mutation; write it as \\x22 / \\x27`);
     allClean = false;
+    kernels.push({ src, tests, sha256: bytes, clean: false, why: 'hidden code' });
     continue;
   }
   // a red suite kills every mutant and reads as CLEAN — so the unmutated code must pass its tests first, or nothing is judged
@@ -85,15 +93,31 @@ for (const [src, tests] of PAIRS) {
   if (base.status !== 0) {
     console.log(`✗ ${src.padEnd(16)} RED BASELINE — its tests fail with no mutation applied (${tests.join(', ')}); nothing can be judged`);
     allClean = false;
+    kernels.push({ src, tests, sha256: bytes, clean: false, why: 'red baseline' });
     continue;
   }
   const r = runMutations(join(HERE, src), { cwd: HERE, cap: 5000, timeout: 120000, testCmd: ['node', '--test', ...tests] });
   rows.push(r);
   console.log(`${r.clean && !r.capped ? '✓' : '✗'} ${src.padEnd(16)} ${String(r.killed).padStart(3)}/${String(r.total).padEnd(3)} killed${r.ignored.length ? ` · ${r.ignored.length} reviewed-equivalent` : ''} · ${((Date.now() - t0) / 1000).toFixed(1)}s`);
+  // v0.6 refuses to judge a suite slower than half the bound, or a file with nothing to mutate: say why, never a bare 0/0
+  if (r.reason) console.log(`    NOT JUDGED: ${r.reason}`);
+  for (const e of r.rejectedExemptions || []) console.log(`    EXEMPTION REFUSED: ${e.mutation} :: ${e.snippet} (${e.why})`);
   for (const s of r.survived) console.log(`    SURVIVED line ${s.line}: ${s.mutation} :: ${s.snippet}`);
   if (!r.clean || r.capped) allClean = false;
+  kernels.push({ src, tests, sha256: bytes, total: r.total, killed: r.killed, survived: r.survived.length, ignored: r.ignored.length, clean: r.clean && !r.capped, seconds: Math.round((Date.now() - t0) / 100) / 10 });
 }
 const k = rows.reduce((a, r) => a + r.killed, 0), n = rows.reduce((a, r) => a + r.total, 0);
 console.log(`\n${allClean ? 'WITNESS CLEAN' : 'WITNESS NOT CLEAN'} — ${k}/${n} mutants killed`);
+if (out) {
+  // the receipt: which harness judged, which commit and run (on GitHub's runner), and for every kernel the bytes it judged
+  const pin = JSON.parse(readFileSync(join(HERE, '.witness/PIN.json'), 'utf8'));
+  const receipt = { kind: 'kardlings.witness-receipt', v: 1,
+    harness: { repo: pin.repo, tag: pin.tag, commit: pin.commit, files: Object.fromEntries(Object.keys(pin.files).map((f) => [f, sha(f)])) },
+    commit: process.env.GITHUB_SHA || null, run: process.env.GITHUB_RUN_ID || null, runner: process.env.RUNNER_OS || process.platform,
+    finished: new Date().toISOString(), clean: allClean, killed: k, total: n, kernels };
+  mkdirSync(dirname(resolve(out)), { recursive: true });
+  writeFileSync(out, JSON.stringify(receipt, null, 1) + '\n');
+  console.log('receipt written to ' + out);
+}
 process.exit(allClean ? 0 : 1);
 }
